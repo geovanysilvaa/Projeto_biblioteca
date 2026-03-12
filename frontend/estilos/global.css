@@ -1,0 +1,107 @@
+@charset "UTF-8";
+
+/*Configurações Globais*/
+
+
+/*Variaveis*/
+:root {
+    --cor01: white;
+}
+
+/*Cor de fundo*/
+body {
+    background-color: var(--cor01);
+}
+
+
+/*Estilo do topo e menu com botão ocultar*/
+
+:root {
+    --cor01: rgb(224, 235, 241);
+    --cor02: black;
+    --cor03: #22CA6B;
+    --cor04: #66f4a3be;
+    --cor05: #3B7554;
+}
+
+/*Topo*/
+
+.Topo {
+    margin-top: -54px;
+    background-color: var(--cor05);
+    position: relative;
+    left: -7px;
+    top: 50px;
+    max-width: 1523px;
+    min-width: 684px;
+    height: 50px;
+    width: 100%;
+    overflow: hidden;
+}
+
+
+#btn_ocultar {
+    position: absolute;
+    left: 160px;
+    bottom: 686px;
+    border: 1px solid black;
+    border-radius: 3px;
+}
+
+#btn_ocultar:hover {
+    background-color: var(--cor01);
+}
+
+/*btns*/
+
+.btns {
+    text-decoration: none;
+    margin-bottom: 20px;
+    background-color: var(--cor01);
+    border: 1px solid gray;
+    border-radius: 10px;
+    width: 150px;
+    height: 30px;
+    position: relative;
+    left: 10px;
+    top: 100px;
+}
+
+.btns:hover {
+    background-color: lightgray;
+}
+
+
+/* (MENU) Botões de navegação do tela inicial */
+.menu_btns {
+    background-color:var(--cor05);
+    position: relative;
+    max-height: 718px;
+    min-height: 718px;
+    height: 100%;
+    width: 200px;
+    right: 7px;
+    border-radius: 1px;
+    
+    transition: ease 1s;
+}
+/*Botão selecionado*/
+.btns_selecionado {
+    background-color:var(--cor04) !important;
+    border: 3px solid var(--cor03) !important;
+}
+/************************************/
+
+.menu_btns_oculte {
+    background-color:var(--cor05);
+    position: relative;
+    max-height: 718px;
+    min-height: 718px;
+    height: 100%;
+    width: 200px;
+    border-radius: 1px;
+    right: 167px;
+    
+    transition: 1s ease;
+}
+/************************************/

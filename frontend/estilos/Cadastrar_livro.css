@@ -1,0 +1,48 @@
+@charset "UTF-8";
+
+:root{
+    --cor01:rgb(224, 235, 241);
+}
+
+/*btns_cadastrar*/
+
+.btns_cadastrar {
+    position: relative;
+    text-decoration: none;
+    margin-bottom: 20px;
+    background-color: var(--cor01);
+    border: 1px solid gray;
+    border-radius: 10px;
+    width: 150px;
+    height: 30px;
+    position: relative;
+    left: 1180px;
+    top: -600px;
+}
+
+.btns_cadastrar:hover {
+    background-color: lightgray;
+}
+
+.dialogo_cadastro{
+    background-color: rgba(0, 0, 0, 0.332);
+    width: 99%;
+    height: 98vh;
+    left: 0px;
+    top: 5px;
+    display: flex;
+    position: absolute;
+    align-items: center;
+}
+
+
+/*dialogo na tela de cadastro*/
+.dialogo{
+    background-color:rgba(255, 255, 255, 0.703);
+    position: absolute;
+    left: 550px;
+    width: 400px;
+    height: 400px;
+    border:  1px solid black;
+    border-radius: 5px;
+}
