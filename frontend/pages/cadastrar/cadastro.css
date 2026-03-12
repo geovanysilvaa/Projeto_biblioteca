@@ -1,0 +1,14 @@
+/**
+ *Tela Cadastro
+*/
+
+.TelaCadastro {
+    position: relative;
+    width: 432px;
+    height: 300px;
+    left: 515px;
+    top: 156px;
+    border-radius: 8px;
+}
+
+/***/

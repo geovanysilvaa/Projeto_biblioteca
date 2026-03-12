@@ -3,13 +3,16 @@ import { ServiceInstituicao } from "../services/ServiceInstituicao";
 import { LoginInstituicaoDTO, CreateInstituicaoDTO } from "../models/dto.instituicao";
 import { Response, NextFunction, Request } from "express";
 
+/*Testado*/
 export class InstituicaoController {
+
     private serviceIntituicao: IServiceInstituicao;
 
     constructor(serviceInstituicao?: IServiceInstituicao) {
         this.serviceIntituicao = serviceInstituicao ?? new ServiceInstituicao();
     }
-    login = async (req: Request, res: Response, next: NextFunction) => {
+
+    public login = async (req: Request, res: Response, next: NextFunction) => {
         try {
             let user: LoginInstituicaoDTO = req.body;
             const resposta = await this.serviceIntituicao.login(user);
@@ -19,7 +22,7 @@ export class InstituicaoController {
         }
     };
 
-    cadastrar = async (req: Request, res: Response, next: NextFunction) => {
+    public cadastrar = async (req: Request, res: Response, next: NextFunction) => {
         try {
             let user: CreateInstituicaoDTO = req.body;
             const resposta = await this.serviceIntituicao.cadastrar(user);
@@ -29,7 +32,7 @@ export class InstituicaoController {
         }
     };
 
-    listar = async (req: Request, res: Response, next: NextFunction) => {
+    public listar = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const resposta = await this.serviceIntituicao.listar();
             res.status(200).json(resposta);
@@ -38,7 +41,7 @@ export class InstituicaoController {
         }
     };
 
-    listaID = async (req: Request, res: Response, next: NextFunction) => {
+    public listaID = async (req: Request, res: Response, next: NextFunction) => {
         try {
             let id = Number(req.params.id)
             const resposta = await this.serviceIntituicao.listarId(id);
@@ -48,7 +51,7 @@ export class InstituicaoController {
         }
     };
 
-    update = async (req: Request, res: Response, next: NextFunction) => {
+    public update = async (req: Request, res: Response, next: NextFunction) => {
         try {
             let id = Number(req.params.id)
             const resposta = await this.serviceIntituicao.atualizar(id, req.body);
@@ -58,7 +61,7 @@ export class InstituicaoController {
         }
     };
 
-    delete = async (req: Request, res: Response, next: NextFunction) => {
+    public delete = async (req: Request, res: Response, next: NextFunction) => {
         try {
             let id = Number(req.params.id)
             const resposta = await this.serviceIntituicao.deletar(id);

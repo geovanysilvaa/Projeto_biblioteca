@@ -1,26 +1,29 @@
 import { CreateInstituicaoDTO, LoginInstituicaoDTO, ResponseInstituicaoDTO, UpdateInstituicaoDTO } from "../models/dto.instituicao";
 import { IServiceInstituicao } from "../interfaces/Instituicao/InstituicaoService";
 import { IIRepositoryInstituicao } from "../interfaces/Instituicao/InstituicaoRepository";
-import { InstituicaoRepository } from "../repositories/IRepositoryInstituicao";
+import { InstituicaoRepository } from "../repositories/RepositoryInstituicao";
+import bcrypt from 'bcrypt';
 
+
+/*Testado*/
 export class ServiceInstituicao implements IServiceInstituicao {
-    private repository: IIRepositoryInstituicao;
+    private repositoryinstituicao: IIRepositoryInstituicao;
 
-    constructor(repository?: IIRepositoryInstituicao) {
-        this.repository = repository ?? new InstituicaoRepository();
+    constructor(repositoryinstituicao?: IIRepositoryInstituicao) {
+        this.repositoryinstituicao = repositoryinstituicao ?? new InstituicaoRepository();
     }
 
-    async login(data: LoginInstituicaoDTO): Promise<ResponseInstituicaoDTO> {
-        const existe = await this.repository.listarEmail(data.email)
+    public async login(data: LoginInstituicaoDTO): Promise<ResponseInstituicaoDTO> {
+        const existe = await this.repositoryinstituicao.listarEmail(data.email)
         if (!existe) {
-            throw new Error("Usuario não encontrado");
+            throw new Error("Usuario não encontrado.");
         }
 
-
-        if(existe.senha != data.senha){
-            throw new Error("Senha ou email incorretas");
+        const senhaSegura = await bcrypt.compare(data.senha, existe.senha);
+        if (!senhaSegura) {
+            throw new Error("Email ou senha incorretas.");
         }
-        
+
         let response: ResponseInstituicaoDTO;
         response = {
             id: existe.id,
@@ -32,15 +35,27 @@ export class ServiceInstituicao implements IServiceInstituicao {
         return response;
     }
 
-    async cadastrar(data: CreateInstituicaoDTO): Promise<ResponseInstituicaoDTO> {
-        let existe = await this.repository.listarEmail(data.email);
+    public async cadastrar(data: CreateInstituicaoDTO): Promise<ResponseInstituicaoDTO> {
+        const existe = await this.repositoryinstituicao.listarEmail(data.email);
 
         if (existe) {
-            throw new Error("Email ja cadastrado");
+            throw new Error("Email ja cadastrado.");
         }
 
-        let resposta: ResponseInstituicaoDTO;
-        resposta = await this.repository.cadastrar(data);
+        const senhaSegura = await bcrypt.hash(data.senha, 10);
+
+        const dados: CreateInstituicaoDTO = {
+            nome: data.nome,
+            email: data.email,
+            senha: senhaSegura
+        }
+
+        let resposta: ResponseInstituicaoDTO | null;
+
+        resposta = await this.repositoryinstituicao.cadastrar(dados);
+        if (!resposta) {
+            throw new Error("Não foi possivel Cadastrar Instituição.");
+        }
 
         resposta = {
             id: resposta.id,
@@ -52,8 +67,8 @@ export class ServiceInstituicao implements IServiceInstituicao {
         return resposta;
     }
 
-    async listar(): Promise<ResponseInstituicaoDTO[]> {
-        let resposta = await this.repository.listar();
+    public async listar(): Promise<ResponseInstituicaoDTO[]> {
+        let resposta = await this.repositoryinstituicao.listar();
 
         return resposta.map(elemento => ({
             id: elemento.id,
@@ -63,10 +78,10 @@ export class ServiceInstituicao implements IServiceInstituicao {
         }));
     }
 
-    async listarId(id: number): Promise<ResponseInstituicaoDTO | null> {
-        let resposta = await this.repository.listarId(id);
+    public async listarId(id: number): Promise<ResponseInstituicaoDTO | null> {
+        let resposta = await this.repositoryinstituicao.listarId(id);
         if (!resposta) {
-            throw new Error("Usuário nao encontrado")
+            throw new Error("Usuário nao encontrado.")
         }
 
         return {
@@ -77,20 +92,20 @@ export class ServiceInstituicao implements IServiceInstituicao {
         };
     }
 
-    async atualizar(id: number, data: UpdateInstituicaoDTO): Promise<ResponseInstituicaoDTO> {
-        let resposta = await this.repository.listarId(id);
+    public async atualizar(id: number, data: UpdateInstituicaoDTO): Promise<ResponseInstituicaoDTO> {
+        const resposta = await this.repositoryinstituicao.listarId(id);
         if (!resposta) {
-            throw new Error("Usuario não existe")
+            throw new Error("Usuario não existe.")
         }
 
-        if (data.email) {
-            const existe = await this.repository.listarEmail(data.email);
-            if (existe && existe.id != id) {
-                throw new Error("Email já cadastrado por outro usuário");
-            }
+        const dados = {
+            nome: data.nome ?? resposta.nome,
+            email: data.email ?? resposta.email,
+            senha: data.senha ?? resposta.senha
         }
 
-        let update: ResponseInstituicaoDTO = await this.repository.atualizar(id, data);
+        const update: ResponseInstituicaoDTO = await this.repositoryinstituicao.atualizar(id, dados);
+
         return {
             id: update.id,
             email: update.email,
@@ -99,7 +114,12 @@ export class ServiceInstituicao implements IServiceInstituicao {
         }
     }
 
-    async deletar(id: number): Promise<void> {
-        return this.repository.deletar(id);
+    public async deletar(id: number): Promise<number> {
+        const resposta = await this.repositoryinstituicao.deletar(id);
+
+        if (resposta == 0) {
+            throw new Error("Instituição não existe.");
+        }
+        return resposta;
     }
 }

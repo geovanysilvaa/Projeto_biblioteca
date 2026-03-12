@@ -2,16 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.InstituicaoRepository = void 0;
 const prisma_1 = require("../lib/prisma");
-/**
- * Clases responsavel pelo CRUD da Instituição.  (Já testado 100%)/(ainda falta ajustes)
- *
-*/
+/*Testado*/
 class InstituicaoRepository {
-    /**
-     * Metodo cadastrar Instituição.
-     * @param data - dados (Instituição)
-     * @returns resposta com os campos (data)
-    */
     async cadastrar(data) {
         const resposta = await prisma_1.prisma.$queryRaw `
 
@@ -35,6 +27,7 @@ class InstituicaoRepository {
     }
     async listarEmail(email) {
         const resposta = await prisma_1.prisma.$queryRaw `
+
         SELECT id, nome, email, senha, "createdAt"
         FROM "Instituicao"
         WHERE email = ${email};
@@ -43,6 +36,7 @@ class InstituicaoRepository {
     }
     async listarId(id) {
         const resposta = await prisma_1.prisma.$queryRaw `
+
         SELECT id, nome, email, senha, "createdAt"
         FROM "Instituicao"
         WHERE id = ${id};
@@ -63,6 +57,7 @@ class InstituicaoRepository {
     }
     async deletar(id) {
         const resposta = await prisma_1.prisma.$executeRaw `
+        
         DELETE 
         FROM "Instituicao" 
         WHERE id = ${id};

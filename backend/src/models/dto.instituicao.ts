@@ -20,7 +20,7 @@ export interface ResponseInstituicaoDTO {
   createdAt: Date;
 }
 
-export interface ResponseSegureRepository {
+export interface ResponseInstituicaoSecureDTO {
   id: number;
   nome: string;
   email: string;
@@ -30,6 +30,6 @@ export interface ResponseSegureRepository {
 
 export interface UpdateInstituicaoDTO {
   nome?: string;
+  senha?:string;
   email?: string;
-  senha?: string;
 }

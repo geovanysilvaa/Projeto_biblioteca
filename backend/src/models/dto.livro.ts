@@ -2,29 +2,40 @@
  * DTO Livro
 */
 
-interface CreateLivro{
-    nome:string;
-    autor:string;
-    ano:string;
-    quantidade:number;
-    categorio:string;
-    IdIntituicao:number;
+export interface CreateLivro {
+    nome: string;
+    autor: string;
+    ano: number;
+    categoria: string;
+    quantidade: number;
+    instituicaoID: number;
 }
 
-interface ResponseLivro{
+export interface ResponseLivro {
+    id: number;
+    nome: string;
+    autor: string;
+    ano: number;
+    categoria: string;
+    quantidade: number;
+    instituicaoID: number;
+}
+
+export interface UpdateLivro {
+    nome?: string;
+    autor?: string;
+    ano?: number;
+    quantidade?: number;
+    categoria?: string;
+    instituicaoID?: number;
+}
+
+export interface UpdateResponseLivro {
     id:number;
-    nome:string;
-    autor:string;
-    ano:string;
-    quantidade:number;
-    categorio:string;
-    IdIntituicao:number;
-}
-
-interface UpdateLivro{
-    nome?:string;
-    autor?:string;
-    ano?:string;
-    quantidade?:number;
-    categorio?:string;
+    nome: string;
+    autor: string;
+    ano: number;
+    quantidade: number;
+    categoria: string;
+    instituicaoID: number;
 }

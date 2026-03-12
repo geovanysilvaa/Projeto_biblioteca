@@ -1,0 +1,31 @@
+/*Style de mensagens*/
+
+/*Mensagem de Sucesso/Status bem sucedido*/
+
+.mensagemSucesso{
+    text-align: center;
+    border: 1px solid green;
+    border-radius: 3px;
+    background-color: rgb(129, 239, 129);
+    color: rgb(4, 167, 34);
+    width: 400px;
+    height: 25px;
+    position: relative;
+    bottom: -375px;
+    left: 1050px;
+}
+
+/*Mensagem de Erro/Status mau sucedido*/
+
+.mensagemErro{
+    text-align: center;
+    border: 1px solid red;
+    border-radius: 3px;
+    background-color: rgb(239, 129, 129);
+    color: rgb(167, 4, 9);
+    width: 400px;
+    height: 25px;
+    position: relative;
+    bottom: -375px;
+    left: 1050px;
+}

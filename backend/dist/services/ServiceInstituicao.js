@@ -1,18 +1,23 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ServiceInstituicao = void 0;
-const IRepositoryInstituicao_1 = require("../repositories/IRepositoryInstituicao");
+const RepositoryInstituicao_1 = require("../repositories/RepositoryInstituicao");
+const bcrypt_1 = __importDefault(require("bcrypt"));
 class ServiceInstituicao {
     constructor(repository) {
-        this.repository = repository ?? new IRepositoryInstituicao_1.InstituicaoRepository();
+        this.repository = repository ?? new RepositoryInstituicao_1.InstituicaoRepository();
     }
     async login(data) {
         const existe = await this.repository.listarEmail(data.email);
         if (!existe) {
-            throw new Error("Usuario não encontrado");
+            throw new Error("Usuario não encontrado.");
         }
-        if (existe.senha != data.senha) {
-            throw new Error("Senha ou email incorretas");
+        const senhaSegura = await bcrypt_1.default.compare(data.senha, existe.senha);
+        if (!senhaSegura) {
+            throw new Error("Email ou senha incorretas.");
         }
         let response;
         response = {
@@ -24,12 +29,21 @@ class ServiceInstituicao {
         return response;
     }
     async cadastrar(data) {
-        let existe = await this.repository.listarEmail(data.email);
+        const existe = await this.repository.listarEmail(data.email);
         if (existe) {
-            throw new Error("Email ja cadastrado");
+            throw new Error("Email ja cadastrado.");
         }
+        const senhaSegura = await bcrypt_1.default.hash(data.senha, 10);
+        const dados = {
+            nome: data.nome,
+            email: data.email,
+            senha: senhaSegura
+        };
         let resposta;
-        resposta = await this.repository.cadastrar(data);
+        resposta = await this.repository.cadastrar(dados);
+        if (!resposta) {
+            throw new Error("Não foi possivel Cadastrar Instituição.");
+        }
         resposta = {
             id: resposta.id,
             email: resposta.email,
@@ -50,7 +64,7 @@ class ServiceInstituicao {
     async listarId(id) {
         let resposta = await this.repository.listarId(id);
         if (!resposta) {
-            throw new Error("Usuário nao encontrado");
+            throw new Error("Usuário nao encontrado.");
         }
         return {
             id: resposta.id,
@@ -62,15 +76,14 @@ class ServiceInstituicao {
     async atualizar(id, data) {
         let resposta = await this.repository.listarId(id);
         if (!resposta) {
-            throw new Error("Usuario não existe");
+            throw new Error("Usuario não existe.");
         }
-        if (data.email) {
-            const existe = await this.repository.listarEmail(data.email);
-            if (existe && existe.id != id) {
-                throw new Error("Email já cadastrado por outro usuário");
-            }
-        }
-        let update = await this.repository.atualizar(id, data);
+        const dados = {
+            nome: data.nome ?? resposta.nome,
+            email: data.email ?? resposta.email,
+            senha: data.senha ?? resposta.senha
+        };
+        const update = await this.repository.atualizar(id, dados);
         return {
             id: update.id,
             email: update.email,
@@ -79,7 +92,11 @@ class ServiceInstituicao {
         };
     }
     async deletar(id) {
-        return this.repository.deletar(id);
+        const resposta = await this.repository.deletar(id);
+        if (resposta == 0) {
+            throw new Error("Instituição não existe.");
+        }
+        return resposta;
     }
 }
 exports.ServiceInstituicao = ServiceInstituicao;
