@@ -9,15 +9,14 @@ export class RepositoryEmprestimo implements IRepositoryEmprestimo {
     public async cadastrarEmprestimo(data: CreateEmprestimo): Promise<ResponseEmprestimo | null> {
         const resposta = await prisma.$queryRaw<ResponseEmprestimo[]>`
         
-        INSERT INTO "Emprestimo" (data_emprestimo, data_devolucao, instituicaoID, livroID ,alunoID) 
+        INSERT INTO "Emprestimo" ( data_devolucao,  "instituicaoID", "livroID" ,"alunoID") 
         VALUES(
-        ${data.data_emprestimo},
         ${data.data_devolucao},
         ${data.instituicaoID},
         ${data.livroID},
         ${data.alunoID}
         ) 
-        RETURNING id, data_emprestimo, data_devolucao, instituicaoID, livroID, alunoID;
+        RETURNING id, data_emprestimo, data_devolucao,  "instituicaoID", "livroID", "alunoID";
     `;
 
         return resposta[0] ?? null;
@@ -26,7 +25,7 @@ export class RepositoryEmprestimo implements IRepositoryEmprestimo {
     public async listarTodos(): Promise<ResponseEmprestimo[]> {
         const resposta = await prisma.$queryRaw<ResponseEmprestimo[]>`
         
-        SELECT id, data_emprestimo, data_devolucao, instituicaoID, livroID, alunoID 
+        SELECT id, data_emprestimo, data_devolucao,  "instituicaoID", "livroID", "alunoID" 
         FROM "Emprestimo";
     `;
 
@@ -36,7 +35,7 @@ export class RepositoryEmprestimo implements IRepositoryEmprestimo {
     public async listarId(id: number): Promise<ResponseEmprestimo | null> {
         const resposta = await prisma.$queryRaw<ResponseEmprestimo[]>`
 
-        SELECT id, data_emprestimo, data_devolucao, instituicaoID, livroID, alunoID 
+        SELECT id, data_emprestimo, data_devolucao,  "instituicaoID", "livroID", "alunoID" 
         FROM "Emprestimo"
         WHERE id = ${id}
     `;
@@ -45,16 +44,24 @@ export class RepositoryEmprestimo implements IRepositoryEmprestimo {
     }
 
     public async atualizarEmprestimo(id: number, data: UpdateEmprestimo): Promise<ResponseEmprestimo> {
+        const emprestimoAtual = await this.listarId(id);
+
+        const updateData = {
+            data_devolucao: data.data_devolucao ?? emprestimoAtual?.data_devolucao,
+            instituicaoID: data.instituicaoID ?? emprestimoAtual?.instituicaoID,
+            livroID: data.livroID ?? emprestimoAtual?.livroID,
+            alunoID: data.alunoID ?? emprestimoAtual?.alunoID
+        }
+
         const resposta = await prisma.$queryRaw<ResponseEmprestimo[]>`
 
         UPDATE "Emprestimo"
-        SET data_emprestimo = ${data.data_emprestimo},
-        data_devolucao = ${data.data_devolucao},
-        instituicaoID = ${data.instituicaoID},
-        livroID = ${data.livroID},
-        alunoID = ${data.alunoID}
+        SET data_devolucao = ${updateData.data_devolucao},
+        "instituicaoID" = ${updateData.instituicaoID},
+        "livroID" = ${updateData.livroID},
+        "alunoID" = ${updateData.alunoID}
         WHERE id = ${id}
-        RETURNING id, data_emprestimo, data_devolucao, instituicaoID, livroID, alunoID;
+        RETURNING id, data_emprestimo, data_devolucao,  "instituicaoID", "livroID", "alunoID";
     `;
 
         return resposta[0];

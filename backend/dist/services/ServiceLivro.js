@@ -1,29 +1,19 @@
-import { CreateLivro, ResponseLivro, UpdateLivro } from "../models/dto.livro";
-import { IIRepositoryInstituicao } from "../interfaces/Instituicao/InstituicaoRepository";
-import { InstituicaoRepository } from "../repositories/RepositoryInstituicao";
-import { RespositoryLivro } from "../repositories/RepositoryLivro";
-import { IlivroRepository } from "../interfaces/Ilivro/ILivroRepository";
-import { IServiceLivro } from "../interfaces/Ilivro/ILivroService";
-
-
-export class ServiceLivro implements IServiceLivro {
-
-    private repositoryinstituicao: IIRepositoryInstituicao;
-    private repositorylivro: IlivroRepository;
-
-    constructor(repositoryinstituicao?: IIRepositoryInstituicao, repositorylivro?: IlivroRepository) {
-        this.repositoryinstituicao = repositoryinstituicao ?? new InstituicaoRepository();
-        this.repositorylivro = repositorylivro ?? new RespositoryLivro();
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ServiceLivro = void 0;
+const RepositoryInstituicao_1 = require("../repositories/RepositoryInstituicao");
+const RepositoryLivro_1 = require("../repositories/RepositoryLivro");
+class ServiceLivro {
+    constructor(repositoryinstituicao, repositorylivro) {
+        this.repositoryinstituicao = repositoryinstituicao ?? new RepositoryInstituicao_1.InstituicaoRepository();
+        this.repositorylivro = repositorylivro ?? new RepositoryLivro_1.RespositoryLivro();
     }
-
-    public async cadastrarLivro(data: CreateLivro): Promise<ResponseLivro> {
+    async cadastrarLivro(data) {
         const existeInstituicao = await this.repositoryinstituicao.listarId(data.instituicaoID);
         if (!existeInstituicao) {
             throw new Error("Instuição não existe.");
         }
-
-        let dados: CreateLivro;
-
+        let dados;
         dados = {
             nome: data.nome,
             autor: data.autor,
@@ -31,47 +21,36 @@ export class ServiceLivro implements IServiceLivro {
             categoria: data.categoria,
             quantidade: data.quantidade,
             instituicaoID: data.instituicaoID
-        }
-
+        };
         const resposta = await this.repositorylivro.cadastrarLivro(dados);
         if (!resposta) {
             throw new Error("Não foi possivel cadastrar livro.");
         }
         return resposta;
-
     }
-
-    public async listarTodos(): Promise<ResponseLivro[]> {
+    async listarTodos() {
         const resposta = await this.repositorylivro.listaLivros();
         return resposta;
     }
-
-    public async listarId(id: number): Promise<ResponseLivro> {
+    async listarId(id) {
         const existe = await this.repositorylivro.listaLivrosId(id);
         if (!existe) {
             throw new Error("Este livro não existe.");
         }
-
         return existe;
     }
-
-    public async atualizarLivro(id: number, data: UpdateLivro): Promise<ResponseLivro> {
+    async atualizarLivro(id, data) {
         const existe = await this.repositorylivro.listaLivrosId(id);
         if (!existe) {
             throw new Error("Livro não existe");
         }
-
         if (data.instituicaoID) {
-
             const existeInstituicao = await this.repositoryinstituicao.listarId(data.instituicaoID);
-
             if (!existeInstituicao) {
                 throw new Error("Instituição não encontrada.");
             }
-
         }
-
-        const resposta: ResponseLivro = await this.repositorylivro.atualizarLivro(id, {
+        const resposta = await this.repositorylivro.atualizarLivro(id, {
             nome: data.nome ?? existe.nome,
             autor: data.autor ?? existe.autor,
             ano: data.ano ?? existe.ano,
@@ -79,7 +58,6 @@ export class ServiceLivro implements IServiceLivro {
             categoria: data.categoria ?? existe.categoria,
             instituicaoID: data.instituicaoID ?? existe.instituicaoID
         });
-
         return {
             id: resposta.id,
             nome: resposta.nome,
@@ -88,20 +66,18 @@ export class ServiceLivro implements IServiceLivro {
             categoria: resposta.categoria,
             quantidade: resposta.quantidade,
             instituicaoID: resposta.instituicaoID
-        }
+        };
     }
-
-    public async delete(id: number): Promise<number> {
+    async delete(id) {
         const exiteLivro = this.repositorylivro.listaLivrosId(id);
         if (!exiteLivro) {
-            throw new Error("Livro não existe.")
+            throw new Error("Livro não existe.");
         }
-
         const resposta = await this.repositorylivro.deleteLivro(id);
         if (resposta == 0) {
             throw new Error("Não foi possivel apagar este livro.");
         }
-
         return resposta;
     }
 }
+exports.ServiceLivro = ServiceLivro;

@@ -9,7 +9,7 @@ export class RespositoryLivro implements IlivroRepository {
     public async cadastrarLivro(data: CreateLivro): Promise<ResponseLivro | null> {
         const resposta = await prisma.$queryRaw<ResponseLivro[]>`
 
-        INSERT INTO "Livro" (nome, autor, ano, categoria, quantidade, instituicaoID)
+        INSERT INTO "Livro" (nome, autor, ano, categoria, quantidade,  "instituicaoID")
         VALUES (
         ${data.nome},
         ${data.autor},
@@ -18,7 +18,7 @@ export class RespositoryLivro implements IlivroRepository {
         ${data.quantidade},
         ${data.instituicaoID}
         )
-        RETURNING id, nome, autor, ano, categoria, quantidade, instituicaoID;
+        RETURNING id, nome, autor, ano, categoria, quantidade, "instituicaoID";
     `;
 
         return resposta[0] ?? null;
@@ -27,7 +27,7 @@ export class RespositoryLivro implements IlivroRepository {
     public async listaLivros(): Promise<ResponseLivro[]> {
         const resposta = await prisma.$queryRaw<ResponseLivro[]>`
 
-        SELECT id, nome, autor, ano, categoria, quantidade, instituicaoID 
+        SELECT id, nome, autor, ano, categoria, quantidade,  "instituicaoID"
         FROM "Livro"
     `;
 
@@ -37,7 +37,7 @@ export class RespositoryLivro implements IlivroRepository {
     public async listaLivrosId(id: number): Promise<ResponseLivro | null> {
         const resposta = await prisma.$queryRaw<ResponseLivro[]>`
 
-        SELECT  id, nome, autor, ano, categoria, quantidade,instituicaoID 
+        SELECT  id, nome, autor, ano, categoria, quantidade, "instituicaoID" 
         FROM "Livro"
         WHERE id = ${id};
     `;
@@ -65,9 +65,9 @@ export class RespositoryLivro implements IlivroRepository {
         ano = ${updateData.ano},
         quantidade = ${updateData.quantidade},  
         categoria = ${updateData.categoria},
-        instituicaoID = ${updateData.instituicaoID}
+        "instituicaoID" = ${updateData.instituicaoID}
         WHERE id = ${id}
-        RETURNING id, nome, autor, ano, quantidade, categoria, instituicaoID;
+        RETURNING id, nome, autor, ano, quantidade, categoria,  "instituicaoID";
     `;
 
         return resposta[0];
