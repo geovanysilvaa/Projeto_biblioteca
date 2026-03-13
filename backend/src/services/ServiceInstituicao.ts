@@ -14,12 +14,14 @@ export class ServiceInstituicao implements IServiceInstituicao {
     }
 
     public async login(data: LoginInstituicaoDTO): Promise<ResponseInstituicaoDTO> {
-        const existe = await this.repositoryinstituicao.listarEmail(data.email)
+        const existe = await this.repositoryinstituicao.listarEmail(data.email);
+  
         if (!existe) {
-            throw new Error("Usuario não encontrado.");
+            throw new Error("Intituição não encontrado.");
         }
 
         const senhaSegura = await bcrypt.compare(data.senha, existe.senha);
+   
         if (!senhaSegura) {
             throw new Error("Email ou senha incorretas.");
         }
@@ -81,7 +83,7 @@ export class ServiceInstituicao implements IServiceInstituicao {
     public async listarId(id: number): Promise<ResponseInstituicaoDTO | null> {
         let resposta = await this.repositoryinstituicao.listarId(id);
         if (!resposta) {
-            throw new Error("Usuário nao encontrado.")
+             throw new Error("Intituição não encontrado.");
         }
 
         return {
@@ -95,16 +97,16 @@ export class ServiceInstituicao implements IServiceInstituicao {
     public async atualizar(id: number, data: UpdateInstituicaoDTO): Promise<ResponseInstituicaoDTO> {
         const resposta = await this.repositoryinstituicao.listarId(id);
         if (!resposta) {
-            throw new Error("Usuario não existe.")
+             throw new Error("Intituição não encontrado.");
         }
 
-        const dados = {
+        const senhaSegura = await bcrypt.hash(resposta.senha,10);
+        
+        const update: ResponseInstituicaoDTO = await this.repositoryinstituicao.atualizar(id, {
             nome: data.nome ?? resposta.nome,
             email: data.email ?? resposta.email,
-            senha: data.senha ?? resposta.senha
-        }
-
-        const update: ResponseInstituicaoDTO = await this.repositoryinstituicao.atualizar(id, dados);
+            senha: senhaSegura
+        });
 
         return {
             id: update.id,
@@ -115,10 +117,14 @@ export class ServiceInstituicao implements IServiceInstituicao {
     }
 
     public async deletar(id: number): Promise<number> {
+        const existeInstituicao = await this.repositoryinstituicao.listarId(id);
+        if(!existeInstituicao){
+           throw new Error("Intituição não encontrado.");  
+        }
         const resposta = await this.repositoryinstituicao.deletar(id);
 
         if (resposta == 0) {
-            throw new Error("Instituição não existe.");
+            throw new Error("Não foi possivel deletar.");
         }
         return resposta;
     }

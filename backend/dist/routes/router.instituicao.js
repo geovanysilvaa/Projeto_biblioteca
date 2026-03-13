@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.routerInstituicao = routerInstituicao;
 const express_1 = require("express");
+/*Testado*/
 function routerInstituicao(controllerinstituicao) {
     const router = (0, express_1.Router)();
     router.post("/login", controllerinstituicao.login);

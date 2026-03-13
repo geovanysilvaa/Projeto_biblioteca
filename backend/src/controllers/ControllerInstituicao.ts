@@ -1,6 +1,6 @@
 import { IServiceInstituicao } from "../interfaces/Instituicao/InstituicaoService";
 import { ServiceInstituicao } from "../services/ServiceInstituicao";
-import { LoginInstituicaoDTO, CreateInstituicaoDTO } from "../models/dto.instituicao";
+import { LoginInstituicaoDTO, CreateInstituicaoDTO, UpdateInstituicaoDTO } from "../models/dto.instituicao";
 import { Response, NextFunction, Request } from "express";
 
 /*Testado*/
@@ -16,7 +16,11 @@ export class InstituicaoController {
         try {
             let user: LoginInstituicaoDTO = req.body;
             const resposta = await this.serviceIntituicao.login(user);
-            res.status(200).json(resposta);
+
+            res.status(200).json({
+                mensagem: "Login realizado com sucesso.",
+                dados: resposta
+            });
         } catch (error) {
             next(error)
         }
@@ -26,7 +30,11 @@ export class InstituicaoController {
         try {
             let user: CreateInstituicaoDTO = req.body;
             const resposta = await this.serviceIntituicao.cadastrar(user);
-            res.status(200).json(resposta);
+
+            res.status(201).json({
+                mensagem: "Instituição cadastrada com sucesso",
+                dados: resposta
+            });
         } catch (error) {
             next(error)
         }
@@ -35,7 +43,11 @@ export class InstituicaoController {
     public listar = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const resposta = await this.serviceIntituicao.listar();
-            res.status(200).json(resposta);
+
+            res.status(200).json({
+                mensagem: "Instituições listadas com sucesso",
+                dados: resposta
+            });
         } catch (error) {
             next(error)
         }
@@ -43,9 +55,17 @@ export class InstituicaoController {
 
     public listaID = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            let id = Number(req.params.id)
+            const id = Number(req.params.id);
+
+            if (isNaN(id)) {
+                throw new Error("ID inválido");
+            }
             const resposta = await this.serviceIntituicao.listarId(id);
-            res.status(200).json(resposta);
+
+            res.status(200).json({
+                mensagem: "Instituição encontrada com sucesso",
+                dados: resposta
+            });
         } catch (error) {
             next(error)
         }
@@ -53,9 +73,18 @@ export class InstituicaoController {
 
     public update = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            let id = Number(req.params.id)
-            const resposta = await this.serviceIntituicao.atualizar(id, req.body);
-            res.status(200).json(resposta);
+            const id = Number(req.params.id);
+
+            if (isNaN(id)) {
+                throw new Error("ID inválido");
+            }
+            let data: UpdateInstituicaoDTO = req.body;
+            const resposta = await this.serviceIntituicao.atualizar(id, data);
+
+            res.status(200).json({
+                mensagem: "Instituição atualizada com sucesso",
+                dados: resposta
+            });
         } catch (error) {
             next(error)
         }
@@ -63,9 +92,13 @@ export class InstituicaoController {
 
     public delete = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            let id = Number(req.params.id)
-            const resposta = await this.serviceIntituicao.deletar(id);
-            res.status(200).json(resposta);
+            const id = Number(req.params.id);
+
+            if (isNaN(id)) {
+                throw new Error("ID inválido");
+            }
+            await this.serviceIntituicao.deletar(id);
+            res.status(204).send();
         } catch (error) {
             next(error)
         }

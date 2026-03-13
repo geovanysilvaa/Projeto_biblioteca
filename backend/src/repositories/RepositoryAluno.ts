@@ -9,13 +9,13 @@ export class RepositoryAluno implements IAlunoRepository {
     public async cadastrarAluno(data: CreateAluno): Promise<ResponseAluno | null> {
         const resposta = await prisma.$queryRaw<ResponseAluno[]>`
 
-        INSERT INTO "Aluno" (nome, turma, instituicaoID)
+        INSERT INTO "Aluno" (nome, turma, "instituicaoID")
         VALUES(
         ${data.nome},
         ${data.turma},
         ${data.instituicaoID}
         )
-        RETURNING id, nome, turma, instituicaoID;
+        RETURNING id, nome, turma, "instituicaoID";
     `;
         return resposta[0] ?? null;
     }
@@ -23,7 +23,7 @@ export class RepositoryAluno implements IAlunoRepository {
     public async listarAluno(): Promise<ResponseAluno[]> {
         const resposta = await prisma.$queryRaw<ResponseAluno[]>`
 
-        SELECT id, nome, turma, instituicaoID 
+        SELECT id, nome, turma, "instituicaoID" 
         FROM "Aluno";
     `;
 
@@ -33,7 +33,7 @@ export class RepositoryAluno implements IAlunoRepository {
     public async listarAlunoId(id: number): Promise<ResponseAluno | null> {
         const resposta = await prisma.$queryRaw<ResponseAluno[]>`
 
-        SELECT id, nome turma, instituicaoID 
+        SELECT id, nome, turma, "instituicaoID" 
         FROM "Aluno"
         WHERE id = ${id}
     `;
@@ -43,7 +43,7 @@ export class RepositoryAluno implements IAlunoRepository {
     public async atualizarCadastro(id: number, data: UpdateAluno): Promise<ResponseAluno> {
         const alunoAtual = await this.listarAlunoId(id);
 
-        let updateData = {
+        const updateData = {
             nome:data.nome ?? alunoAtual?.nome,
             turma:data.turma ?? alunoAtual?.turma,
             instituicaoID:data.instituicaoID ?? alunoAtual?.instituicaoID
@@ -54,9 +54,9 @@ export class RepositoryAluno implements IAlunoRepository {
         UPDATE "Aluno"
         SET nome = ${updateData.nome},
         turma = ${updateData.turma},
-        instituicaoID = ${updateData.instituicaoID} /*atualiza so se id existir*/
+        "instituicaoID" = ${updateData.instituicaoID} 
         WHERE id = ${id}
-        RETURNING id, nome, turma, instituicaoID;
+        RETURNING id, nome, turma, "instituicaoID";
      `;
 
         return resposta[0];

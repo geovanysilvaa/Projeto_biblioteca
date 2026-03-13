@@ -6,14 +6,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ServiceInstituicao = void 0;
 const RepositoryInstituicao_1 = require("../repositories/RepositoryInstituicao");
 const bcrypt_1 = __importDefault(require("bcrypt"));
+/*Testado*/
 class ServiceInstituicao {
-    constructor(repository) {
-        this.repository = repository ?? new RepositoryInstituicao_1.InstituicaoRepository();
+    constructor(repositoryinstituicao) {
+        this.repositoryinstituicao = repositoryinstituicao ?? new RepositoryInstituicao_1.InstituicaoRepository();
     }
     async login(data) {
-        const existe = await this.repository.listarEmail(data.email);
+        const existe = await this.repositoryinstituicao.listarEmail(data.email);
         if (!existe) {
-            throw new Error("Usuario não encontrado.");
+            throw new Error("Intituição não encontrado.");
         }
         const senhaSegura = await bcrypt_1.default.compare(data.senha, existe.senha);
         if (!senhaSegura) {
@@ -29,7 +30,7 @@ class ServiceInstituicao {
         return response;
     }
     async cadastrar(data) {
-        const existe = await this.repository.listarEmail(data.email);
+        const existe = await this.repositoryinstituicao.listarEmail(data.email);
         if (existe) {
             throw new Error("Email ja cadastrado.");
         }
@@ -40,7 +41,7 @@ class ServiceInstituicao {
             senha: senhaSegura
         };
         let resposta;
-        resposta = await this.repository.cadastrar(dados);
+        resposta = await this.repositoryinstituicao.cadastrar(dados);
         if (!resposta) {
             throw new Error("Não foi possivel Cadastrar Instituição.");
         }
@@ -53,7 +54,7 @@ class ServiceInstituicao {
         return resposta;
     }
     async listar() {
-        let resposta = await this.repository.listar();
+        let resposta = await this.repositoryinstituicao.listar();
         return resposta.map(elemento => ({
             id: elemento.id,
             email: elemento.email,
@@ -62,9 +63,9 @@ class ServiceInstituicao {
         }));
     }
     async listarId(id) {
-        let resposta = await this.repository.listarId(id);
+        let resposta = await this.repositoryinstituicao.listarId(id);
         if (!resposta) {
-            throw new Error("Usuário nao encontrado.");
+            throw new Error("Intituição não encontrado.");
         }
         return {
             id: resposta.id,
@@ -74,16 +75,16 @@ class ServiceInstituicao {
         };
     }
     async atualizar(id, data) {
-        let resposta = await this.repository.listarId(id);
+        const resposta = await this.repositoryinstituicao.listarId(id);
         if (!resposta) {
-            throw new Error("Usuario não existe.");
+            throw new Error("Intituição não encontrado.");
         }
-        const dados = {
+        const senhaSegura = await bcrypt_1.default.hash(resposta.senha, 10);
+        const update = await this.repositoryinstituicao.atualizar(id, {
             nome: data.nome ?? resposta.nome,
             email: data.email ?? resposta.email,
-            senha: data.senha ?? resposta.senha
-        };
-        const update = await this.repository.atualizar(id, dados);
+            senha: senhaSegura
+        });
         return {
             id: update.id,
             email: update.email,
@@ -92,9 +93,13 @@ class ServiceInstituicao {
         };
     }
     async deletar(id) {
-        const resposta = await this.repository.deletar(id);
+        const existeInstituicao = await this.repositoryinstituicao.listarId(id);
+        if (!existeInstituicao) {
+            throw new Error("Intituição não encontrado.");
+        }
+        const resposta = await this.repositoryinstituicao.deletar(id);
         if (resposta == 0) {
-            throw new Error("Instituição não existe.");
+            throw new Error("Não foi possivel deletar.");
         }
         return resposta;
     }

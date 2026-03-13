@@ -1,5 +1,4 @@
 export interface CreateEmprestimo {
-    data_emprestimo: Date;
     data_devolucao: Date;
     instituicaoID: number;
     livroID: number;
@@ -16,7 +15,6 @@ export interface ResponseEmprestimo {
 }
 
 export interface UpdateEmprestimo {
-    data_emprestimo?: Date;
     data_devolucao?: Date;
     instituicaoID?: number;
     livroID?: number;

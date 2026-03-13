@@ -54,12 +54,20 @@ export class InstituicaoRepository implements IIRepositoryInstituicao {
     }
 
     public async atualizar(id: number, data: UpdateInstituicaoDTO): Promise<ResponseInstituicaoSecureDTO> {
+        const instituicaoAtual = await this.listarId(id);
+       
+        const updateData = {
+            nome: data.nome ?? instituicaoAtual?.nome,
+            senha: data.senha ?? instituicaoAtual?.senha,
+            email: data.email ?? instituicaoAtual?.email
+        }
+        
         const resposta = await prisma.$queryRaw<ResponseInstituicaoSecureDTO[]>`
 
         UPDATE "Instituicao"
-        SET nome = ${data.nome},
-        email = ${data.email},
-        senha = ${data.senha}
+        SET nome = ${updateData.nome},
+        email = ${updateData.email},
+        senha = ${updateData.senha}
         WHERE id = ${id}
         RETURNING id, nome, email, senha, "createdAt";
      `;
