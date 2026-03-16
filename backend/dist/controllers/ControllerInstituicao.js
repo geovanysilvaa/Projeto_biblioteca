@@ -11,7 +11,8 @@ class InstituicaoController {
                 const resposta = await this.serviceIntituicao.login(user);
                 res.status(200).json({
                     mensagem: "Login realizado com sucesso.",
-                    dados: resposta
+                    dados: resposta,
+                    sucesso: true
                 });
             }
             catch (error) {
@@ -24,7 +25,8 @@ class InstituicaoController {
                 const resposta = await this.serviceIntituicao.cadastrar(user);
                 res.status(201).json({
                     mensagem: "Instituição cadastrada com sucesso",
-                    dados: resposta
+                    dados: resposta,
+                    sucesso: true
                 });
             }
             catch (error) {

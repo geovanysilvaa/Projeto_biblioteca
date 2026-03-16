@@ -8,7 +8,10 @@ class EmprestimoController {
             try {
                 let emprestimo = req.body;
                 const resposta = await this.emprestimoService.novoEmprestimo(emprestimo);
-                res.status(200).json(resposta);
+                res.status(200).json({
+                    dados: resposta,
+                    mensagem: "Emprestimo cadastrado com sucesso."
+                });
             }
             catch (error) {
                 next(error);
@@ -18,7 +21,10 @@ class EmprestimoController {
             try {
                 let id = Number(req.params.id);
                 const resposta = await this.emprestimoService.listarEmprestimoId(id);
-                res.status(200).json(resposta);
+                res.status(200).json({
+                    dados: resposta,
+                    mensagem: "Emprestimo encontrado com sucesso."
+                });
             }
             catch (error) {
                 next(error);
@@ -26,8 +32,11 @@ class EmprestimoController {
         };
         this.listarEmprestimos = async (req, res, next) => {
             try {
-                let alunos = await this.emprestimoService.listarEmprestimos();
-                res.status(200).json(alunos);
+                const resposta = await this.emprestimoService.listarEmprestimos();
+                res.status(200).json({
+                    dados: resposta,
+                    mensagem: "Emprestimos listados com sucesso."
+                });
             }
             catch (error) {
                 next(error);
@@ -35,9 +44,15 @@ class EmprestimoController {
         };
         this.atualizarEmprestimo = async (req, res, next) => {
             try {
-                let id = Number(req.params.id);
+                const id = Number(req.params.id);
+                if (isNaN(id)) {
+                    throw new Error("ID inválido.");
+                }
                 const resposta = await this.emprestimoService.atualizarEmprestimo(id, req.body);
-                res.status(200).json(resposta);
+                res.status(200).json({
+                    dados: resposta,
+                    mensagem: "Emprestimo atualiza com sucesso."
+                });
             }
             catch (error) {
                 next(error);
@@ -45,9 +60,12 @@ class EmprestimoController {
         };
         this.delete = async (req, res, next) => {
             try {
-                let id = Number(req.params.id);
-                const resposta = await this.emprestimoService.delete(id);
-                res.status(200).json(resposta);
+                const id = Number(req.params.id);
+                if (isNaN(id)) {
+                    throw new Error("ID inválido.");
+                }
+                await this.emprestimoService.delete(id);
+                res.status(204).send();
             }
             catch (error) {
                 next(error);
