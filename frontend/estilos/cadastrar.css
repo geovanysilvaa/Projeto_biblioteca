@@ -1,0 +1,74 @@
+/* Tela de Cadastro (Mobile, Table, Notebook) */
+
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/**/
+:root {
+    --cor01: #21B2C5;
+    --cor02: #3595A0;
+    --cor03: #00DDF5;
+    --cor04: #3B6F75;
+    --cor05: #32484B;
+    --cor06: rgb(192, 210, 210);
+    --cor07: rgb(115, 164, 176);
+    --cor08: black;
+}
+
+body {
+    background-color: var(--cor04);
+}
+
+main {
+    background-color: var(--cor06);
+    border-radius: 10px;
+    max-width: 1000px;
+    min-height: 400px;
+    width: 45%;
+    height: 60vh;
+    margin: auto;
+    padding: 30px;
+}
+
+main>h2 {
+    text-align: center;
+}
+
+main>form>label{
+    font-size: 14px;
+}
+
+main>form>button {
+    background-color:var(--cor02);
+    border: none;
+    border-radius: 8px;
+    display: block;
+    margin: 10px auto;
+    max-width: 250px;
+    min-width: 50px;
+    max-height: 30px;
+    min-height: 25px;
+    width: 70%;
+    height: 5vh;
+    cursor: pointer;
+}
+
+main>form>input{
+    background-color: var(--cor06);
+    border: none;
+    border-bottom: 2px solid var(--cor08);
+    max-width: 700px;
+    min-width: 210px;
+    width: 100%;
+}
+
+main>form>input:-webkit-autofill{
+    -webkit-box-shadow: 0 0 0 1000px var(--cor06) inset;
+    -webkit-text-fill-color: var(--cor08);
+}
+
+/**/
+.btn_cadastro:hover{
+    background-color: var(--cor07);
+}
