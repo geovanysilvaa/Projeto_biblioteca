@@ -35,12 +35,12 @@ main>h2 {
     text-align: center;
 }
 
-main>form>label{
+main>div>label {
     font-size: 14px;
 }
 
-main>form>button {
-    background-color:var(--cor02);
+main>div>button {
+    background-color: var(--cor02);
     border: none;
     border-radius: 8px;
     display: block;
@@ -52,23 +52,24 @@ main>form>button {
     width: 70%;
     height: 5vh;
     cursor: pointer;
+
 }
 
-main>form>input{
+main>div>input {
     background-color: var(--cor06);
     border: none;
     border-bottom: 2px solid var(--cor08);
-    max-width: 700px;
+    max-width: 806px;
     min-width: 210px;
     width: 100%;
 }
 
-main>form>input:-webkit-autofill{
+main>div>input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0 1000px var(--cor06) inset;
     -webkit-text-fill-color: var(--cor08);
 }
 
 /**/
-.btn_cadastro:hover{
+.btn_cadastro:hover {
     background-color: var(--cor07);
 }
