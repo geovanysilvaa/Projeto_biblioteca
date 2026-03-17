@@ -1,6 +1,34 @@
 const endpointInstituicao = "http://localhost:3000/instituicao/cadastro";
 const endpointInstituicaoLogin = "http://localhost:3000/instituicao/login";
-const imensagem = document.querySelector("#imensagem");
+
+const conteiner_mensagem = document.querySelector("#imensagem");
+
+function mensagemErro(texto) {
+    const conteudo = conteiner_mensagem.querySelector("div");
+    if(!conteudo){
+        const div = document.createElement("div");
+        div.setAttribute("class","erro")
+        div.textContent = texto;
+        conteiner_mensagem.appendChild(div);
+
+        setInterval(()=>{
+            div.remove();
+        },2000)
+    }
+}
+function mensagemSucessso(texto) {
+    const conteudo = conteiner_mensagem.querySelector("div");
+    if(!conteudo){
+        const div = document.createElement("div");
+        div.setAttribute("class","sucesso");
+        div.textContent = texto;
+        conteiner_mensagem.appendChild(div);
+
+        setInterval(()=>{
+            div.remove();
+        },2000)
+    }
+}
 
 export async function cadastroIntituicao(dados01) {
     const resposta = await fetch(endpointInstituicao, {
@@ -14,16 +42,11 @@ export async function cadastroIntituicao(dados01) {
     let info = await resposta.json();
 
     if (!info.sucesso) {
-        const div = document.createElement("div");
-        div.innerHTML = info.message;
-        imensagem.appendChild(div);
+        mensagemErro(info.message);
     } else {
-        const div = document.createElement("div");
-        div.innerHTML = info.message;
-        imensagem.appendChild(div);
+        mensagemSucessso(info.mensagem);
     }
 }
-
 
 export async function loginIntituicao(dados02) {
     const resposta = await fetch(endpointInstituicaoLogin, {
@@ -37,13 +60,9 @@ export async function loginIntituicao(dados02) {
     let info = await resposta.json();
 
     if (!info.sucesso) {
-        const div = document.createElement("div");
-        div.setAttribute("id","msg_amostra");
-        div.innerHTML = info.message;
-        imensagem.appendChild(div);
+        mensagemErro(info.message);
     } else {
-        const div = document.createElement("div");
-        div.innerHTML = info.mensagem;
-        imensagem.appendChild(div);
+        mensagemSucessso(info.mensagem);
+        window.location.href ="../paginas/telaInicio.html";
     }
 }

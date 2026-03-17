@@ -1,9 +1,13 @@
 /* imports */
 import { loginIntituicao } from "../api/instituicaoCadastro.js";
 
-const btn_login = document.querySelector("#btn_login");
+/* Botões */
+const formulario_login = document.querySelector("#formulario_login");
 
-btn_login.addEventListener("click",()=>{
+/* Evento */
+formulario_login.addEventListener("submit",(evento)=>{
+    evento.preventDefault();
+
     const email = document.querySelector("#lemail").value;
     const senha = document.querySelector("#lsenha").value;
     
