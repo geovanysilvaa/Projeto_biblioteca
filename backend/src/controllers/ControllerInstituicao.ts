@@ -19,7 +19,8 @@ export class InstituicaoController {
 
             res.status(200).json({
                 mensagem: "Login realizado com sucesso.",
-                dados: resposta
+                dados: resposta,
+                sucesso:true
             });
         } catch (error) {
             next(error)
@@ -33,7 +34,8 @@ export class InstituicaoController {
 
             res.status(201).json({
                 mensagem: "Instituição cadastrada com sucesso",
-                dados: resposta
+                dados: resposta,
+                sucesso:true
             });
         } catch (error) {
             next(error)

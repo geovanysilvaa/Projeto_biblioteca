@@ -6,9 +6,12 @@ class LivroController {
     constructor(livroservice) {
         this.cadastrarLivro = async (req, res, next) => {
             try {
-                let livro = req.body;
+                const livro = req.body;
                 const resposta = await this.livroservice.cadastrarLivro(livro);
-                res.status(200).json(resposta);
+                res.status(200).json({
+                    dados: resposta,
+                    mensagem: "Livro cadastrado com sucesso."
+                });
             }
             catch (error) {
                 next(error);
@@ -16,9 +19,12 @@ class LivroController {
         };
         this.listarId = async (req, res, next) => {
             try {
-                let id = Number(req.params.id);
+                const id = Number(req.params.id);
                 const resposta = await this.livroservice.listarId(id);
-                res.status(200).json(resposta);
+                res.status(200).json({
+                    dados: resposta,
+                    mensagem: "Livro encontrado com sucesso"
+                });
             }
             catch (error) {
                 next(error);
@@ -26,8 +32,11 @@ class LivroController {
         };
         this.listarTodos = async (req, res, next) => {
             try {
-                let alunos = await this.livroservice.listarTodos();
-                res.status(200).json(alunos);
+                const resposta = await this.livroservice.listarTodos();
+                res.status(200).json({
+                    dados: resposta,
+                    mensagem: "Livros listados com sucesso"
+                });
             }
             catch (error) {
                 next(error);
@@ -35,9 +44,15 @@ class LivroController {
         };
         this.atualizarLivro = async (req, res, next) => {
             try {
-                let id = Number(req.params.id);
+                const id = Number(req.params.id);
+                if (isNaN(id)) {
+                    throw new Error("ID inváldo.");
+                }
                 const resposta = await this.livroservice.atualizarLivro(id, req.body);
-                res.status(200).json(resposta);
+                res.status(200).json({
+                    dados: resposta,
+                    mensagem: "Livro atualizado com sucesso."
+                });
             }
             catch (error) {
                 next(error);
