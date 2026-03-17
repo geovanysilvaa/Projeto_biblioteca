@@ -11,25 +11,28 @@
 <body>
     <!-- main -->
     <main>
-        <!-- h2-->
+        <!-- h2 -->
         <h2>Registro
             <img src="../icons/iconLivro.png" alt="icone livro">
         </h2>
-        <!-- end h2-->
+        <!-- end h2 -->
         <!-- form -->
-        <div>
+        <form id="formulario_cadastro">
             <label for="inome">Nome:</label>
             <input type="text" id="inome" placeholder="Digite seu nome" minlength="5" maxlength="30" required>
             <label for="iemail">Email:</label>
             <input type="email" id="iemail" placeholder="Digite seu email" minlength="5" maxlength="30" required>
             <label for="isenha">Senha:</label>
             <input type="password" id="isenha" placeholder="Digite sua senha" minlength="5" maxlength="30" required>
-            <button class="btn_cadastro" id="btn_cadastro">Cadastrar</button>
-         <!-- end form -->
-        </div>
+            <button type="submit" class="btn_cadastro" id="btn_cadastro">Cadastrar</button>
+            <!-- end form -->
+        </form>
         <!-- end main -->
+        <!-- mensagem -->
+        <div id="imensagem"></div>
+        <!-- end mensagem -->
     </main>
-    <script type="module" src="../scripts//instituicaoCadastro.js"></script>
+    <script type="module" src="../scripts/instituicaoCadastro.js"></script>
 </body>
 
 </html>

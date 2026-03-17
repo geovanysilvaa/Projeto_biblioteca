@@ -35,11 +35,11 @@ main>h2 {
     text-align: center;
 }
 
-main>div>label {
+main>form>label {
     font-size: 14px;
 }
 
-main>div>button {
+main>form>button {
     background-color: var(--cor02);
     border: none;
     border-radius: 8px;
@@ -55,7 +55,7 @@ main>div>button {
 
 }
 
-main>div>input {
+main>form>input {
     background-color: var(--cor06);
     border: none;
     border-bottom: 2px solid var(--cor08);
@@ -64,7 +64,7 @@ main>div>input {
     width: 100%;
 }
 
-main>div>input:-webkit-autofill {
+main>form>input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0 1000px var(--cor06) inset;
     -webkit-text-fill-color: var(--cor08);
 }
@@ -73,3 +73,28 @@ main>div>input:-webkit-autofill {
 .btn_cadastro:hover {
     background-color: var(--cor07);
 }
+
+/* Mensagems de ERRO/SUCESSO */
+
+.erro{
+    background-color: rgb(244, 170, 170);
+    border-radius: 4px;
+    border: 1px solid red;
+    max-width: 300px;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    color: rgb(226, 116, 116);
+}
+
+.sucesso{
+    background-color: rgb(109, 205, 109);
+    border-radius: 4px;
+    border: 1px solid green;
+    max-width: 300px;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    color: rgb(69, 179, 69);
+}
+/****************************/
