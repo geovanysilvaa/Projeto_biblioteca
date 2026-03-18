@@ -16,6 +16,7 @@ function mensagemErro(texto) {
         },2000)
     }
 }
+
 function mensagemSucessso(texto) {
     const conteudo = conteiner_mensagem.querySelector("div");
     if(!conteudo){
