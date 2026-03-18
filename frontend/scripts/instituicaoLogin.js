@@ -15,6 +15,6 @@ formulario_login.addEventListener("submit",(evento)=>{
         email: email,
         senha: senha
     }
+    
     loginIntituicao(dados);
-
 });

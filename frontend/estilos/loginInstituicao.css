@@ -22,13 +22,14 @@ body {
 
 main {
     background-color: var(--cor06);
-    border-radius: 10px;
     max-width: 1000px;
     min-height: 400px;
     width: 45%;
     height: 60vh;
     margin: auto;
     padding: 30px;
+
+    border-radius: 10px;
 }
 
 main>h2 {
@@ -41,8 +42,6 @@ main>form>label{
 
 main>form>button {
     background-color:var(--cor02);
-    border: none;
-    border-radius: 8px;
     display: block;
     margin: 15px auto;
     max-width: 250px;
@@ -52,16 +51,19 @@ main>form>button {
     width: 70%;
     height: 5vh;
     cursor: pointer;
+    
+    border: none;
+    border-radius: 8px;
 }
 
 main>form>input{
     background-color: var(--cor06);
-    border: none;
-    border-bottom: 2px solid var(--cor08);
     max-width: 806px;
     min-width: 210px;
     width: 100%;
-    flex-direction: row-reverse;
+  
+    border: none;
+    border-bottom: 2px solid var(--cor08);
 }
 
 main>form>input:-webkit-autofill{
@@ -79,23 +81,25 @@ main>form>input:-webkit-autofill{
 
 .erro{
     background-color: rgb(244, 170, 170);
-    border-radius: 4px;
-    border: 1px solid red;
     max-width: 300px;
     width: 100%;
     margin: auto;
     text-align: center;
     color: rgb(226, 116, 116);
+  
+    border-radius: 4px;
+    border: 1px solid red;
 }
 
 .sucesso{
     background-color: rgb(109, 205, 109);
-    border-radius: 4px;
-    border: 1px solid green;
     max-width: 300px;
     width: 100%;
     margin: auto;
     text-align: center;
     color: rgb(69, 179, 69);
+   
+    border-radius: 4px;
+    border: 1px solid green;
 }
 /****************************/
