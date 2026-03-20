@@ -32,6 +32,17 @@ class ServiceLivro {
         const resposta = await this.repositorylivro.listaLivros();
         return resposta;
     }
+    async listaLivrosInstituicao(id) {
+        const instituicaoID = this.repositoryinstituicao.listarId(id);
+        const temLivro = await this.repositorylivro.listaLivrosInstituicao(id);
+        if (!instituicaoID) {
+            throw new Error("Instituição não existe.");
+        }
+        if (temLivro.length == 0) {
+            throw new Error("Não possui livros cadastrados");
+        }
+        return temLivro;
+    }
     async listarId(id) {
         const existe = await this.repositorylivro.listaLivrosId(id);
         if (!existe) {

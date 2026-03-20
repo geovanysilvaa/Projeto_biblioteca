@@ -1,38 +1,13 @@
-const endpointInstituicao = "http://localhost:3000/instituicao/cadastro";
+/* imports */
+import { mensagemErro,mensagemSucessso } from "../componentes/mensagem.js";
+
+/* endpoints */
+const endpointCadastrarInstituicao = "http://localhost:3000/instituicao/cadastro";
 const endpointInstituicaoLogin = "http://localhost:3000/instituicao/login";
 
-const conteiner_mensagem = document.querySelector("#imensagem");
-
-function mensagemErro(texto) {
-    const conteudo = conteiner_mensagem.querySelector("div");
-    if(!conteudo){
-        const div = document.createElement("div");
-        div.setAttribute("class","erro")
-        div.textContent = texto;
-        conteiner_mensagem.appendChild(div);
-
-        setInterval(()=>{
-            div.remove();
-        },2000)
-    }
-}
-
-function mensagemSucessso(texto) {
-    const conteudo = conteiner_mensagem.querySelector("div");
-    if(!conteudo){
-        const div = document.createElement("div");
-        div.setAttribute("class","sucesso");
-        div.textContent = texto;
-        conteiner_mensagem.appendChild(div);
-
-        setInterval(()=>{
-            div.remove();
-        },2000)
-    }
-}
 
 export async function cadastroIntituicao(dados01) {
-    const resposta = await fetch(endpointInstituicao, {
+    const resposta = await fetch(endpointCadastrarInstituicao, {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
@@ -40,8 +15,8 @@ export async function cadastroIntituicao(dados01) {
         body: JSON.stringify(dados01)
     });
 
-    let info = await resposta.json();
-
+    const info = await resposta.json();
+   
     if (!info.sucesso) {
         mensagemErro(info.message);
     } else {
@@ -58,11 +33,12 @@ export async function loginIntituicao(dados02) {
         body: JSON.stringify(dados02)
     });
 
-    let info = await resposta.json();
+    const info = await resposta.json();
 
     if (!info.sucesso) {
         mensagemErro(info.message);
     } else {
+        localStorage.setItem("id",info.dados.id)
         mensagemSucessso(info.mensagem);
         window.location.href ="../paginas/telaInicio.html";
     }

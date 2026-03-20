@@ -18,16 +18,34 @@ body{
     background-color: var(--cor04);
 }
 
-header{
+header {
     background-color: var(--cor06);
     max-height: 100px;
+    max-width: 1510px;
     min-height: 30px;
     height: 40vh;
+    width: 99%;
+    margin-top: 12.3px;
+
+    position: fixed;
 
     display: flex;
     align-items: end;
     justify-content: space-around;
     border-radius: 4px;
+}
+@media screen and (max-width:720px){
+    header{
+        width: 657px;
+    }
+    
+}
+
+@media screen and (max-width:580px){
+    header{
+        width: 475px;
+    }
+    
 }
 
 a {

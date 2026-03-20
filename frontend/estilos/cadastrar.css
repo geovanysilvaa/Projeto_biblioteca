@@ -29,6 +29,8 @@ main {
     height: 60vh;
     margin: auto;
     padding: 30px;
+    margin-top: 90px;
+
 }
 
 main>h2 {
@@ -68,13 +70,14 @@ main>form>input:-webkit-autofill {
     -webkit-text-fill-color: var(--cor08);
 }
 
+
 /**/
 .btn_cadastro:hover {
     background-color: var(--cor07);
 }
 
-/* Mensagems de ERRO/SUCESSO */
 
+/* Mensagems de ERRO/SUCESSO(login/cadastro) */
 .erro{
     background-color: rgb(244, 170, 170);
     border-radius: 4px;
@@ -97,3 +100,4 @@ main>form>input:-webkit-autofill {
     color: rgb(69, 179, 69);
 }
 /****************************/
+

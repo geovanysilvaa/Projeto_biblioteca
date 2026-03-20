@@ -37,6 +37,15 @@ class RespositoryLivro {
     `;
         return resposta[0] ?? null;
     }
+    async listaLivrosInstituicao(id) {
+        const resposta = await prisma_1.prisma.$queryRaw `
+        
+        SELECT  id, nome, autor, ano, categoria, quantidade, "instituicaoID" 
+        FROM "Livro"
+        WHERE "instituicaoID" = ${id}; 
+    `;
+        return resposta;
+    }
     async atualizarLivro(id, data) {
         const livroAtual = await this.listaLivrosId(id);
         const updateData = {

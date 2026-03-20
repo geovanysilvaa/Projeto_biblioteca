@@ -16,6 +16,18 @@
     --cor08: black;
 }
 
+nav>a{
+    font-size: 13px;
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+    color: var(--cor04);
+}
+
+a:hover{
+    color: var(--cor02);
+}
+
 body {
     background-color: var(--cor04);
 }
@@ -28,6 +40,7 @@ main {
     height: 60vh;
     margin: auto;
     padding: 30px;
+    margin-top: 90px;
 
     border-radius: 10px;
 }
@@ -78,7 +91,6 @@ main>form>input:-webkit-autofill{
 
 
 /* Mensagems de ERRO/SUCESSO */
-
 .erro{
     background-color: rgb(244, 170, 170);
     max-width: 300px;

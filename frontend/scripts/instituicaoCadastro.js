@@ -1,7 +1,7 @@
 /* imports */
 import { cadastroIntituicao } from "../api/instituicaoCadastro.js";
 
-/* Botões */
+/* Formularios */
 const formulario_cadastro = document.querySelector("#formulario_cadastro");
 
 /* Evento */
