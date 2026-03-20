@@ -18,16 +18,33 @@ body {
     background-color: var(--cor04);
 }
 
-header{
+header {
     background-color: var(--cor06);
     max-height: 100px;
+    max-width: 1510px;
     min-height: 30px;
     height: 40vh;
+    width: 99%;
+
+    position: fixed;
 
     display: flex;
     align-items: end;
     justify-content: space-around;
     border-radius: 4px;
+}
+@media screen and (max-width:720px){
+    header{
+        width: 657px;
+    }
+    
+}
+
+@media screen and (max-width:580px){
+    header{
+        width: 475px;
+    }
+    
 }
 
 /* links de navegação dos menus */
@@ -38,17 +55,37 @@ a {
 }
 
 a:hover {
-   background-color: var(--cor02);
-   border-radius: 3px;
+    background-color: var(--cor02);
+    border-radius: 3px;
 }
 
 /******************************/
 
-/* Formulario */
+/* botões do form cadastrar livro */
+.btn_fecharForm{
+    background-color: rgb(248, 75, 75);
+    border-radius: 8px;
+    border: none;
+}
+.btn_fecharForm:hover{
+    background-color: red;
+}
+
+.btn_gravar{
+    background-color: var(--cor06);
+    border-radius: 3px;
+    border: none;
+}
+.btn_gravar:hover{
+    background-color:var(--cor07);
+}
+/********************************/
+
+/* Formulario cadastrar livro*/
 
 .fundo_formulario {
     background-color: rgba(0, 0, 0, 0.278);
-    position: absolute;
+    position: fixed;
     top: 0px;
     left: 0px;
     width: 100%;
@@ -67,9 +104,8 @@ a:hover {
     width: 70%;
 
     display: flex;
-    align-items: start;
+    align-items: flex-start;
     justify-content: space-between;
-
     border-radius: 5px 5px 0px 0px;
 }
 
@@ -89,7 +125,7 @@ a:hover {
 .rodape_formulario {
     background-color: var(--cor02);
     max-width: 420px;
-    min-width: 344px;
+    min-width: 334px;
     width: 100%;
     height: 5vh;
 
@@ -105,42 +141,150 @@ a:hover {
 
 /*******************************/
 
+/* botões do form editar livro */
+.btn_fecharFormV{
+    background-color: rgb(248, 75, 75);
+    border-radius: 8px;
+    border: none;
+}
+.btn_fecharFormV:hover{
+    background-color: red;
+}
+
+.btn_gravarV{
+    background-color: var(--cor06);
+    border-radius: 3px;
+    border: none;
+}
+.btn_gravarV:hover{
+    background-color:var(--cor07);
+}
+/*******************************/
+
+/* Formulario editar livro*/
+.fundo_formularioV {
+    background-color: rgba(0, 0, 0, 0.278);
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.titulo_formularioV {
+    background-color: var(--cor02);
+    max-width: 400px;
+    min-width: 300px;
+    width: 70%;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    border-radius: 5px 5px 0px 0px;
+}
+
+.corpo_formularioV {
+    background-color: var(--cor06);
+    max-width: 400px;
+    min-width: 300px;
+    max-height: 200px;
+    min-height: 100px;
+    width: 70%;
+    height: 60vh;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.rodape_formularioV {
+    background-color: var(--cor02);
+    max-width: 420px;
+    min-width: 334px;
+    width: 100%;
+    height: 5vh;
+
+    display: flex;
+    justify-content: center;
+
+    border-radius: 0px 0px 5px 5px;
+}
+
+.ocultar_formularioV {
+    display: none;
+}
+/*******************************/
+
+
 
 /* botão de janela formulario */
 .btn_criarL {
-    margin-top: 15px;
+    position: fixed;
+    margin-top: 120px;
     border: none;
     border-radius: 7px;
 }
-.btn_criarL:hover{
+
+.btn_criarL:hover {
     background-color: var(--cor06);
 }
+
 /*****************************/
 
 
 /* conteiner livro */
-
-/* .lista_livro{
-    border: 2px solid red;
-} */
-
-.corpo_livro{
-    background-color: var(--cor06);
-    max-width: 200px;
-    min-width: 200px;
-    width: 80%;
-
-    border-radius: 3px 3px 8px 8px;
+.lista_livro {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    margin-top: 20px;
+    margin-bottom: -32px;
+    /* border: 2px solid red; */
 }
 
-.fundo_livro{
+@media screen and (max-width: 1230px) {
+    .lista_livro {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media screen and (max-width: 680px) {
+    .lista_livro {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.titulo_livro{
+    background-color: var(--cor02);
+    border-radius: 5px 5px 0px 0px;
+    text-align: center;
+    max-height: 32px;
+  
+    display: flex;
+    justify-content: center;
+}
+ 
+.corpo_livro {
+    background-color: var(--cor06);
+    max-width: 210px;
+    min-width: 200px;
+    width: 80%;
+    margin-top: 150px;
+
+    border-radius: 8px;
+}
+
+.fundo_livro {
     background-color: white;
     max-width: 200px;
-    
+
     border-radius: 3px;
 }
 
-.rodape_livro{
+.rodape_livro {
     background-color: var(--cor02);
     border-radius: 0px 0px 8px 8px;
     max-height: 33px;
@@ -149,27 +293,32 @@ a:hover {
     justify-content: space-around;
 }
 
-.btn_editar{
+.btn_editar {
     margin-top: 10px;
     border-radius: 5px;
     border: none;
+    cursor: pointer;
 }
-.btn_editar:hover{
+
+.btn_editar:hover {
     background-color: var(--cor06);
 }
 
-.btn_deletar{
+.btn_deletar {
     background-color: rgb(252, 88, 88);
     margin-top: 10px;
     border-radius: 5px;
     border: none;
+    cursor: pointer;
 }
-.btn_deletar:hover{
+
+.btn_deletar:hover {
     background-color: red;
 }
 /*******************/
 
-.btn_selecionado{
+
+.btn_selecionado {
     border-radius: 2px;
     border-bottom: 4px solid rgb(255, 255, 255);
 }

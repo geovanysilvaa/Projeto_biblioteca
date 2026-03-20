@@ -46,6 +46,22 @@ export class ServiceLivro implements IServiceLivro {
         return resposta;
     }
 
+    public async listaLivrosInstituicao(id:number):Promise<ResponseLivro[]>{
+        const instituicaoID = this.repositoryinstituicao.listarId(id);
+        
+        const temLivro = await this.repositorylivro.listaLivrosInstituicao(id);
+        
+        if(!instituicaoID){
+            throw new Error("Instituição não existe.");
+        }
+        
+        if(temLivro.length == 0){
+            throw new Error("Não possui livros cadastrados");
+        }
+        
+        return temLivro;
+    }
+
     public async listarId(id: number): Promise<ResponseLivro> {
         const existe = await this.repositorylivro.listaLivrosId(id);
         if (!existe) {

@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../estilos/pag_cadastro.css">
+    <link rel="stylesheet" href="../estilos/mensagem.css">
     <title>Biblioteca</title>
 </head>
 
@@ -15,55 +16,94 @@
         <h2>Biblioteca
             <img src="../icons/iconLivro.png" alt="">
         </h2>
-        
-            <!-- nav -->
-            <nav>
-                <a class="btn_selecionado" href="pag_cadastro.html">Cadastro</a>
-            </nav>
-            <!-- end nav -->
+
+        <!-- nav -->
+        <nav>
+            <a class="btn_selecionado" href="pag_cadastro.html">Cadastro</a>
+        </nav>
+        <!-- end nav -->
     </header>
     <!-- end header -->
 
     <!-- main -->
     <main>
-        <!-- section -->
+        <!-- section (form cadastrar_livro) -->
         <section>
-        <div id="fundo_formulario" class="fundo_formulario ocultar_formulario">
+            <div id="fundo_formulario" class="fundo_formulario ocultar_formulario">
 
-            <div class="titulo_formulario">
+                <div class="titulo_formulario">
 
-                <h4>Cadastrar livro</h4>
+                    <h4>Cadastrar livro</h4>
 
-                <button id="btn_fecharForm" type="button">x</button>
+                    <button class="btn_fecharForm" id="btn_fecharForm" type="button">x</button>
+
+                </div>
+
+                <!-- form -->
+                <form id="corpo_formulario" class="corpo_formulario">
+
+                    <label for="inome">Nome:</label>
+                    <input type="text" id="inome" name="nome" required>
+                    <label for="iautor">Autor:</label>
+                    <input type="text" id="iautor" name="autor" required>
+                    <label for="icategoria">Categoria:</label>
+                    <input type="text" id="icategoria" name="categoria" required>
+                    <label for="iano">Ano:</label>
+                    <input type="number" id="iano" min="0" max="9999" name="ano" required>
+                    <label for="iquantidade">Quantidade:</label>
+                    <input type="number" id="iquantidade" min="1" name="quantidade" required>
+
+                    <div class="rodape_formulario">
+                        <button class="btn_gravar" id="gravar" type="submit">Gravar</button>
+                    </div>
+                </form>
+                <!-- end form -->
 
             </div>
-            
-            <!-- form -->
-            <form class="corpo_formulario ">
-
-                <label for="inome">Nome:</label>
-                <input type="text" id="inome" required>
-                <label for="iautor">Autor:</label>
-                <input type="text" id="iautor" required>
-                <label for="icategoria">Categoria:</label>
-                <input type="text" id="icategoria" required>
-                <label for="iano">Ano:</label>
-                <input type="number" id="iano" min="0" max="9999" required>
-                <label for="iquantidade">Quantidade:</label>
-                <input type="number" id="iquantidade" min="1" required>
-
-                <div class="rodape_formulario">
-                    <button type="submit">Gravar</button>
-                </div>
-            </form>
-            <!-- end form -->
-        </div>
         </section>
         <!-- end section -->
 
-        <!-- section -->
+        <!-- section (form editar_livro) -->
         <section>
-            <button class="btn_criarL" id="btn_criarL"><img src="../icons/iconAdd.png" alt="botao cadastrar livro"></button>
+            <div id="fundo_formularioV" class="fundo_formularioV ocultar_formularioV">
+
+                <div class="titulo_formularioV">
+
+                    <h4>Editar livro</h4>
+
+                    <button class="btn_fecharFormV" id="btn_fecharFormV" type="button">x</button>
+
+                </div>
+
+                <!-- form -->
+                <form id="corpo_formularioV" class="corpo_formularioV">
+
+                    <label for="vnome">Nome:</label>
+                    <input type="text" id="vnome" name="nome" required>
+                    <label for="autor">Autor:</label>
+                    <input type="text" id="vautor" name="autor" required>
+                    <label for="vcategoria">Categoria:</label>
+                    <input type="text" id="vcategoria" name="categoria" required>
+                    <label for="vano">Ano:</label>
+                    <input type="number" id="vano" min="0" max="9999" name="ano" required>
+                    <label for="vquantidade">Quantidade:</label>
+                    <input type="number" id="vquantidade" min="1" name="quantidade" required>
+
+                    <div class="rodape_formularioV">
+                        <button class="btn_gravarV" id="gravarV" type="submit">Gravar</button>
+                    </div>
+                </form>
+                <!-- end form -->
+
+            </div>
+        </section>
+        <!-- end section -->
+
+
+        <!-- section (livro) -->
+        <section>
+            <button class="btn_criarL" id="btn_criarL"><img src="../icons/iconAdd.png"
+                    alt="botao cadastrar livro"></button>
         </section>
         <!-- end section -->
         <!-- section -->
@@ -71,6 +111,10 @@
             <!-- conteiner livro -->
             <div id="lista_livro" class="lista_livro">
                 <!-- <div class="corpo_livro">
+
+                    <div class="titulo_livro">
+                        dffdf
+                    </div>
 
                     <div class="fundo_livro">
                         <p>Nome:</p>
@@ -92,7 +136,43 @@
     </main>
     <!-- end main -->
 
+    <!-- mensagem -->
+    <div>
+
+        <div id="imensagem" class="imensagem ocultar_mensagem">
+
+            <div class="titulo_msg">
+                <button class="btn_fecharmsg" id="btn_fecharmsg">x</button>
+            </div>
+            <div id="corpo_msg" class="corpo_msg">
+            </div>
+            <div class="rodape_msg">
+                <button class="btn_ok" id="btn_ok">Ok</button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div>
+
+        <div id="imensagemV" class="imensagemV ocultar_mensagemV">
+
+            <div class="titulo_msgV">
+                <button class="btn_fecharmsgV" id="btn_fecharmsgV">x</button>
+            </div>
+            <div id="corpo_msgV" class="corpo_msgV">
+            </div>
+            <div class="rodape_msgV">
+                <button class="btn_okV" id="btn_okV">Ok</button>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- end mensagem -->
     <script type="module" src="../scripts/pag_cadastro.js"></script>
+    <script type="module" src="../componentes/mensagem.js"></script>
 </body>
 
 </html>

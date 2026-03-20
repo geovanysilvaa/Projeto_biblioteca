@@ -45,6 +45,16 @@ export class RespositoryLivro implements IlivroRepository {
         return resposta[0] ?? null;
     }
 
+    public async listaLivrosInstituicao(id: number): Promise<ResponseLivro[]> {
+        const resposta = await prisma.$queryRaw<ResponseLivro[]>`
+        
+        SELECT  id, nome, autor, ano, categoria, quantidade, "instituicaoID" 
+        FROM "Livro"
+        WHERE "instituicaoID" = ${id}; 
+    `;
+        return resposta;
+    }
+
     public async atualizarLivro(id: number, data: UpdateLivro): Promise<UpdateResponseLivro> {
         const livroAtual = await this.listaLivrosId(id);
 

@@ -1,7 +1,7 @@
 /* imports */
 import { loginIntituicao } from "../api/instituicaoCadastro.js";
 
-/* Botões */
+/* Formularios */
 const formulario_login = document.querySelector("#formulario_login");
 
 /* Evento */

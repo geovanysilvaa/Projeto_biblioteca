@@ -9,6 +9,7 @@ class LivroController {
                 const livro = req.body;
                 const resposta = await this.livroservice.cadastrarLivro(livro);
                 res.status(200).json({
+                    sucesso: true,
                     dados: resposta,
                     mensagem: "Livro cadastrado com sucesso."
                 });
@@ -24,6 +25,23 @@ class LivroController {
                 res.status(200).json({
                     dados: resposta,
                     mensagem: "Livro encontrado com sucesso"
+                });
+            }
+            catch (error) {
+                next(error);
+            }
+        };
+        this.listaLivrosInstituicao = async (req, res, next) => {
+            try {
+                const id = Number(req.params.id);
+                if (isNaN(id)) {
+                    throw new Error("ID inváldo.");
+                }
+                const resposta = await this.livroservice.listaLivrosInstituicao(id);
+                res.status(200).json({
+                    sucesso: true,
+                    dados: resposta,
+                    mensagem: "Livros listados com sucesso"
                 });
             }
             catch (error) {
@@ -50,6 +68,7 @@ class LivroController {
                 }
                 const resposta = await this.livroservice.atualizarLivro(id, req.body);
                 res.status(200).json({
+                    sucesso: true,
                     dados: resposta,
                     mensagem: "Livro atualizado com sucesso."
                 });
@@ -64,8 +83,12 @@ class LivroController {
                 if (isNaN(id)) {
                     throw new Error("ID inválido");
                 }
-                await this.livroservice.delete(id);
-                res.status(204).send();
+                const resposta = await this.livroservice.delete(id);
+                res.status(200).json({
+                    dados: resposta,
+                    mensagem: "Livro apagado com sucesso.",
+                    sucesso: true
+                });
             }
             catch (error) {
                 next(error);

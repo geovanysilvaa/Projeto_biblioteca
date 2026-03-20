@@ -8,6 +8,7 @@ export function routerLivro(controllerlivro: LivroController) {
     router.post("/cadastrar", controllerlivro.cadastrarLivro);
     router.get("/", controllerlivro.listarTodos);
     router.get("/:id", controllerlivro.listarId);
+    router.get("/instituicao/:id", controllerlivro.listaLivrosInstituicao);
     router.put("/:id", controllerlivro.atualizarLivro);
     router.delete("/:id", controllerlivro.delete);
 
