@@ -78,7 +78,6 @@ main>form>input:-webkit-autofill {
 
 
 /* Mensagems de ERRO/SUCESSO(login/cadastro) */
-
 .erro{
     background-color: rgb(244, 170, 170);
     border-radius: 4px;

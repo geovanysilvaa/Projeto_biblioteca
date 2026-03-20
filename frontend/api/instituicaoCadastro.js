@@ -1,7 +1,7 @@
 /* imports */
 import { mensagemErro,mensagemSucessso } from "../componentes/mensagem.js";
 
-/* endpoint */
+/* endpoints */
 const endpointCadastrarInstituicao = "http://localhost:3000/instituicao/cadastro";
 const endpointInstituicaoLogin = "http://localhost:3000/instituicao/login";
 

@@ -1,8 +1,8 @@
 /* imports */
 import { deletarLivro } from "../api/livro.js";
 
-
-const conteiner_mensagem = document.querySelector("#imensagem");
+/* container */
+const container_mensagem = document.querySelector("#imensagem");
 
 const imensagem = document.querySelector(".imensagem");
 const corpo_msg = document.querySelector("#corpo_msg");
@@ -81,12 +81,12 @@ export function mensagemE(texto) {
 }
 
 export function mensagemErro(texto) {
-    const conteudo = conteiner_mensagem.querySelector("div");
+    const conteudo = container_mensagem.querySelector("div");
     if (!conteudo) {
         const div = document.createElement("div");
         div.setAttribute("class", "erro")
         div.textContent = texto;
-        conteiner_mensagem.appendChild(div);
+        container_mensagem.appendChild(div);
 
         setInterval(() => {
             div.remove();
@@ -95,12 +95,12 @@ export function mensagemErro(texto) {
 }
 
 export function mensagemSucessso(texto) {
-    const conteudo = conteiner_mensagem.querySelector("div");
+    const conteudo = container_mensagem.querySelector("div");
     if (!conteudo) {
         const div = document.createElement("div");
         div.setAttribute("class", "sucesso");
         div.textContent = texto;
-        conteiner_mensagem.appendChild(div);
+        container_mensagem.appendChild(div);
 
         setInterval(() => {
             div.remove();

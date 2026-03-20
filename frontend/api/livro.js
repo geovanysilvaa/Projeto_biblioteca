@@ -1,7 +1,7 @@
 /* imports*/
 import { mensagemE, mensagemS, msg } from "../componentes/mensagem.js";
 
-/* endpoint */
+/* endpoints */
 const endpointListaLivro = "http://localhost:3000/livro/instituicao";
 const endpointLivroDelete = "http://localhost:3000/livro";
 const endpointCadastraLivro = "http://localhost:3000/livro/cadastrar";
@@ -14,7 +14,7 @@ const btn_fecharFormV = document.querySelector("#btn_fecharFormV");
 const fundo_formularioV = document.querySelector("#fundo_formularioV");
 const corpo_formularioV = document.querySelector("#corpo_formularioV");
 
-/* conteiner */
+/* container */
 const lista_livro = document.querySelector("#lista_livro");
 
 
@@ -36,14 +36,14 @@ export async function listarLivroInstituicao(id) {
 
     info.dados.map((elemento) => {
 
-        const divconteiner = document.createElement("div");
-        divconteiner.setAttribute("class", "lista_livro")
-        lista_livro.appendChild(divconteiner);
+        const divcontainer = document.createElement("div");
+        divcontainer.setAttribute("class", "lista_livro")
+        lista_livro.appendChild(divcontainer);
 
 
         const corpo_livro = document.createElement("div");
         corpo_livro.setAttribute("class", "corpo_livro");
-        divconteiner.appendChild(corpo_livro);
+        divcontainer.appendChild(corpo_livro);
 
         const titulo_livro = document.createElement("div");
         titulo_livro.setAttribute("class", "titulo_livro");
