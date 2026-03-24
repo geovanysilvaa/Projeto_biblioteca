@@ -1,0 +1,29 @@
+.container_config {
+    position: absolute;
+    max-width: 1510px;
+    min-width: 475px;
+    width: 100%;
+    margin-top: 110px;
+
+    max-height: 600px;
+    height: 80vh;
+    border: 2px solid red;
+}
+
+@media screen and (max-width:495px) {/* celular */
+    .container_config{
+        width: 96%;
+    }
+}
+
+.titulo_config {
+    border: 2px solid red;
+}
+
+.corpo_config {
+    border: 2px solid red;
+}
+
+.rodape_config {
+    border: 2px solid red;
+}

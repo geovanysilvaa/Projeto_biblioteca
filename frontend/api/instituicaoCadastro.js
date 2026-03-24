@@ -1,5 +1,5 @@
 /* imports */
-import { mensagemErro,mensagemSucessso } from "../componentes/mensagem.js";
+import { mensagemErro, mensagemSucessso } from "../componentes/mensagem.js";
 
 /* endpoints */
 const endpointCadastrarInstituicao = "http://localhost:3000/instituicao/cadastro";
@@ -16,7 +16,7 @@ export async function cadastroIntituicao(dados01) {
     });
 
     const info = await resposta.json();
-   
+
     if (!info.sucesso) {
         mensagemErro(info.message);
     } else {
@@ -38,8 +38,11 @@ export async function loginIntituicao(dados02) {
     if (!info.sucesso) {
         mensagemErro(info.message);
     } else {
-        localStorage.setItem("id",info.dados.id)
+        localStorage.setItem("id", info.dados.id)
         mensagemSucessso(info.mensagem);
-        window.location.href ="../paginas/telaInicio.html";
+
+        setInterval(() => {
+            window.location.href = "../paginas/telaInicio.html";
+        }, 2000);
     }
 }

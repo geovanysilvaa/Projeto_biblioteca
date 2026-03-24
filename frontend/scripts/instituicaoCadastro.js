@@ -12,6 +12,9 @@ formulario_cadastro.addEventListener("submit", (evento) => {
     const email = document.querySelector("#iemail").value;
     const senha = document.querySelector("#isenha").value;
 
+    if(!nome || !email || !senha){
+        return;
+    }
     let dados = {
         nome: nome,
         email: email,

@@ -21,19 +21,19 @@ nav>a{
     display: flex;
     justify-content: center;
     text-decoration: none;
-    color: var(--cor04);
+    color:  rgb(94, 168, 242);
 }
 
 a:hover{
-    color: var(--cor02);
+    color:  rgb(141, 200, 249);
 }
 
 body {
-    background-color: var(--cor04);
+    background-color: white;
 }
 
 main {
-    background-color: var(--cor06);
+    background-color: white;
     max-width: 1000px;
     min-height: 400px;
     width: 45%;
@@ -43,6 +43,7 @@ main {
     margin-top: 90px;
 
     border-radius: 10px;
+    box-shadow: 1px 1px 3px 1px rgb(223, 222, 222);
 }
 
 main>h2 {
@@ -54,7 +55,7 @@ main>form>label{
 }
 
 main>form>button {
-    background-color:var(--cor02);
+    background-color: rgb(94, 168, 242);
     display: block;
     margin: 15px auto;
     max-width: 250px;
@@ -70,25 +71,24 @@ main>form>button {
 }
 
 main>form>input{
-    background-color: var(--cor06);
+    background-color: white;
     max-width: 806px;
     min-width: 210px;
     width: 100%;
   
     border: none;
-    border-bottom: 2px solid var(--cor08);
+    border-bottom: 2px solid  rgb(94, 168, 242);
 }
 
 main>form>input:-webkit-autofill{
-    -webkit-box-shadow: 0 0 0 1000px var(--cor06) inset;
+    -webkit-box-shadow: 0 0 0 1000px white inset;
     -webkit-text-fill-color: var(--cor08);
 }
 
 /**/
 .btn_login:hover{
-    background-color: var(--cor07);
+    background-color: rgb(141, 200, 249);
 }
-
 
 /* Mensagems de ERRO/SUCESSO */
 .erro{

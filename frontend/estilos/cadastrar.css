@@ -17,11 +17,11 @@
 }
 
 body {
-    background-color: var(--cor04);
+    background-color: white;
 }
 
 main {
-    background-color: var(--cor06);
+    background-color: white;
     border-radius: 10px;
     max-width: 1000px;
     min-height: 400px;
@@ -30,7 +30,8 @@ main {
     margin: auto;
     padding: 30px;
     margin-top: 90px;
-
+    
+    box-shadow: 1px 1px 3px 1px rgb(223, 222, 222);
 }
 
 main>h2 {
@@ -42,7 +43,7 @@ main>form>label {
 }
 
 main>form>button {
-    background-color: var(--cor02);
+    background-color:  rgb(94, 168, 242);
     border: none;
     border-radius: 8px;
     display: block;
@@ -57,25 +58,23 @@ main>form>button {
 }
 
 main>form>input {
-    background-color: var(--cor06);
+    background-color: white;
     border: none;
-    border-bottom: 2px solid var(--cor08);
+    border-bottom: 2px solid  rgb(94, 168, 242) ;
     max-width: 806px;
     min-width: 210px;
     width: 100%;
 }
 
 main>form>input:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0 1000px var(--cor06) inset;
+    -webkit-box-shadow: 0 0 0 1000px white inset;
     -webkit-text-fill-color: var(--cor08);
 }
 
-
 /**/
 .btn_cadastro:hover {
-    background-color: var(--cor07);
+    background-color:  rgb(141, 200, 249);
 }
-
 
 /* Mensagems de ERRO/SUCESSO(login/cadastro) */
 .erro{
@@ -100,4 +99,3 @@ main>form>input:-webkit-autofill {
     color: rgb(69, 179, 69);
 }
 /****************************/
-
