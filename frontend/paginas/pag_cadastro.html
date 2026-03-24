@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../estilos/global.css">
     <link rel="stylesheet" href="../estilos/pag_cadastro.css">
     <link rel="stylesheet" href="../estilos/mensagem.css">
     <title>Biblioteca</title>
@@ -12,14 +13,16 @@
 <body>
     <!-- header -->
     <header>
-
+        <!-- h2 -->
         <h2>Biblioteca
-            <img src="../icons/iconLivro.png" alt="">
+            <img src="../icons/iconLivro.png" alt="imagem icone livro">
         </h2>
-
+        <!-- h2 end -->
         <!-- nav -->
         <nav>
+            <a href="telaInicio.html">home</a>
             <a class="btn_selecionado" href="pag_cadastro.html">Cadastro</a>
+            <a href="configuracao.html"><img src="../icons/config.png" alt=""></a>
         </nav>
         <!-- end nav -->
     </header>
@@ -80,7 +83,7 @@
 
                     <label for="vnome">Nome:</label>
                     <input type="text" id="vnome" name="nome" required>
-                    <label for="autor">Autor:</label>
+                    <label for="vautor">Autor:</label>
                     <input type="text" id="vautor" name="autor" required>
                     <label for="vcategoria">Categoria:</label>
                     <input type="text" id="vcategoria" name="categoria" required>
@@ -102,10 +105,10 @@
 
         <!-- section (livro) -->
         <section>
-            <button class="btn_criarL" id="btn_criarL"><img src="../icons/iconAdd.png"
-                    alt="botao cadastrar livro"></button>
+            <button class="btn_criarL" id="btn_criarL">Adicionar</button>
         </section>
         <!-- end section -->
+
         <!-- section -->
         <section>
             <!-- container livro -->
@@ -133,10 +136,11 @@
             <!-- end container livro -->
         </section>
         <!-- end section -->
+
     </main>
     <!-- end main -->
 
-    <!-- mensagem -->
+    <!-- container global de mensagens -->
     <div>
 
         <div id="imensagem" class="imensagem ocultar_mensagem">
@@ -171,6 +175,7 @@
 
     </div>
     <!-- end mensagem -->
+
     <script type="module" src="../scripts/pag_cadastro.js"></script>
     <script type="module" src="../componentes/mensagem.js"></script>
 </body>

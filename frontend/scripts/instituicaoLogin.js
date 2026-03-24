@@ -10,6 +10,11 @@ formulario_login.addEventListener("submit",(evento)=>{
 
     const email = document.querySelector("#lemail").value;
     const senha = document.querySelector("#lsenha").value;
+
+    if(!email || !senha){
+      return;
+    }
+    
     
     let dados = {
         email: email,

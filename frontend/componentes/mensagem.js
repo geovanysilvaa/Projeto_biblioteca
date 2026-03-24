@@ -21,9 +21,9 @@ const btn_ok = document.querySelector("#btn_ok");
 export function msg(id) {
     imensagemV.classList.remove("ocultar_mensagemV");
     const p = document.createElement("p");
-    p.textContent = "";
+    p.innerHTML = "";
     p.style.color = "red";
-    p.textContent = "Voçê deseja apagar esse livro?";
+    p.innerHTML = "Voçê deseja apagar esse livro?";
     corpo_msgV.appendChild(p);
 
     btn_okV.onclick = async () => {
@@ -41,43 +41,53 @@ export function msg(id) {
 }
 
 export function mensagemS(texto) {
-    imensagem.classList.remove("ocultar_mensagem");
-    const p = document.createElement("p");
-    p.setAttribute("class", "sucessomsg")
-    p.innerHTML = "";
-    p.innerHTML = texto;
-    corpo_msg.appendChild(p);
-
-    btn_ok.onclick = () => {
+    if (corpo_msg.querySelector("p")) {
+        return;
+    } else {
+        imensagem.classList.remove("ocultar_mensagem");
+        const p = document.createElement("p");
+        p.setAttribute("class", "sucessomsg")
         p.innerHTML = "";
-        imensagem.classList.add("ocultar_mensagem");
-    };
+        p.innerHTML = texto;
+        corpo_msg.appendChild(p);
 
-    btn_fecharmsg.onclick = () => {
-        p.innerHTML = "";
-        p.remove();
-        imensagem.classList.add("ocultar_mensagem");
-    };
+        btn_ok.onclick = () => {
+            p.innerHTML = "";
+            p.remove();
+            imensagem.classList.add("ocultar_mensagem");
+        };
+
+        btn_fecharmsg.onclick = () => {
+            p.innerHTML = "";
+            p.remove();
+            imensagem.classList.add("ocultar_mensagem");
+        };
+    }
 }
 
 export function mensagemE(texto) {
-    imensagem.classList.remove("ocultar_mensagem");
-    const p = document.createElement("p");
-    p.setAttribute("class", "errormsg")
-    p.innerHTML = "";
-    p.innerHTML = texto;
-    corpo_msg.appendChild(p);
-
-    btn_ok.onclick = () => {
+    if (corpo_msg.querySelector("p")) {
+        return;
+    } else {
+        imensagem.classList.remove("ocultar_mensagem");
+        const p = document.createElement("p");
+        p.setAttribute("class", "errormsg")
         p.innerHTML = "";
-        imensagem.classList.add("ocultar_mensagem");
-    };
+        p.innerHTML = texto;
+        corpo_msg.appendChild(p);
 
-    btn_fecharmsg.onclick = () => {
-        p.innerHTML = "";
-        p.remove();
-        imensagem.classList.add("ocultar_mensagem");
-    };
+        btn_ok.onclick = () => {
+            p.innerHTML = "";
+            p.remove();
+            imensagem.classList.add("ocultar_mensagem");
+        };
+
+        btn_fecharmsg.onclick = () => {
+            p.innerHTML = "";
+            p.remove();
+            imensagem.classList.add("ocultar_mensagem");
+        };
+    }
 }
 
 export function mensagemErro(texto) {
