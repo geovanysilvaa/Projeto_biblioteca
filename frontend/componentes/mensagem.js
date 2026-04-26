@@ -1,119 +1,138 @@
-/* imports */
-import { deletarLivro } from "../api/livro.js";
+export class CaixaMsg {
 
-/* container */
-const container_mensagem = document.querySelector("#imensagem");
+    tipo = null;
+    titulo = null;
+    discricao = null;
+    fundo_msg = document.getElementById("mensagem");
 
-const imensagem = document.querySelector(".imensagem");
-const corpo_msg = document.querySelector("#corpo_msg");
+    constructor(tipo, titulo, discricao) {
 
-const corpo_msgV = document.querySelector("#corpo_msgV");
-const imensagemV = document.querySelector(".imensagemV");
+        this.tipo = tipo;
+        this.titulo = titulo;
+        this.discricao = discricao;
 
-
-/* botões */
-const btn_fecharmsgV = document.querySelector("#btn_fecharmsgV");
-const btn_fecharmsg = document.querySelector("#btn_fecharmsg");
-const btn_okV = document.querySelector("#btn_okV");
-const btn_ok = document.querySelector("#btn_ok");
-
-
-export function msg(id) {
-    imensagemV.classList.remove("ocultar_mensagemV");
-    const p = document.createElement("p");
-    p.innerHTML = "";
-    p.style.color = "red";
-    p.innerHTML = "Voçê deseja apagar esse livro?";
-    corpo_msgV.appendChild(p);
-
-    btn_okV.onclick = async () => {
-        p.innerHTML = "";
-        p.remove();
-        await deletarLivro(id);
-        imensagemV.classList.add("ocultar_mensagemV");
-    };
-
-    btn_fecharmsgV.onclick = () => {
-        p.innerHTML = "";
-        p.remove();
-        imensagemV.classList.add("ocultar_mensagemV");
-    };
-}
-
-export function mensagemS(texto) {
-    if (corpo_msg.querySelector("p")) {
-        return;
-    } else {
-        imensagem.classList.remove("ocultar_mensagem");
-        const p = document.createElement("p");
-        p.setAttribute("class", "sucessomsg")
-        p.innerHTML = "";
-        p.innerHTML = texto;
-        corpo_msg.appendChild(p);
-
-        btn_ok.onclick = () => {
-            p.innerHTML = "";
-            p.remove();
-            imensagem.classList.add("ocultar_mensagem");
-        };
-
-        btn_fecharmsg.onclick = () => {
-            p.innerHTML = "";
-            p.remove();
-            imensagem.classList.add("ocultar_mensagem");
-        };
     }
-}
 
-export function mensagemE(texto) {
-    if (corpo_msg.querySelector("p")) {
-        return;
-    } else {
-        imensagem.classList.remove("ocultar_mensagem");
-        const p = document.createElement("p");
-        p.setAttribute("class", "errormsg")
-        p.innerHTML = "";
-        p.innerHTML = texto;
-        corpo_msg.appendChild(p);
+    monstrar() {
 
-        btn_ok.onclick = () => {
-            p.innerHTML = "";
-            p.remove();
-            imensagem.classList.add("ocultar_mensagem");
-        };
+        if (this.tipo == "ok") {
 
-        btn_fecharmsg.onclick = () => {
-            p.innerHTML = "";
-            p.remove();
-            imensagem.classList.add("ocultar_mensagem");
-        };
+            const div_fundo_msg = document.createElement("div");
+            div_fundo_msg.setAttribute("class", "div_fundo_msg");
+
+            const div_corpo = document.createElement("div");
+            div_corpo.setAttribute("class", "div_corpo_mg");
+
+            /**/
+            const div_titulo = document.createElement("div");
+            div_titulo.setAttribute("class", "div_titulo");
+
+            const div_button = document.createElement("div");
+            div_button.setAttribute("class", "div_button");
+            div_button.textContent = this.titulo
+
+            const button_x = document.createElement("button");
+            button_x.setAttribute("class", "button_x");
+            button_x.innerHTML = "x"
+
+            button_x.addEventListener("click", () => {
+                this.ocultar();
+            })
+
+            const div_meio = document.createElement("div");
+            div_meio.setAttribute("class", "div_meio");
+            div_meio.innerHTML = this.discricao;
+
+
+            const div_rodape = document.createElement("div");
+            div_rodape.setAttribute("class", "div_rodape");
+
+            const div_button_ok = document.createElement("div");
+            div_button_ok.setAttribute("class", "div_button_ok");
+
+            const button_ok = document.createElement("button");
+            button_ok.setAttribute("class", "button_ok");
+            button_ok.innerHTML = "ok"
+            button_ok.addEventListener("click", () => {
+                this.ocultar();
+            })
+
+            div_button_ok.appendChild(button_ok);
+            div_rodape.appendChild(div_button_ok)
+            div_button.appendChild(button_x);
+            div_titulo.appendChild(div_button);
+            div_corpo.append(div_titulo, div_meio, div_rodape);
+
+            div_fundo_msg.appendChild(div_corpo)
+            this.fundo_msg.appendChild(div_fundo_msg);
+
+        } else if (this.tipo == "sn") {
+            return new Promise((resolve, reject) => {
+
+                let resultado = null;
+
+                const div_fundo_msg = document.createElement("div");
+                div_fundo_msg.setAttribute("class", "div_fundo_msg");
+
+                const div_corpo = document.createElement("div");
+                div_corpo.setAttribute("class", "div_corpo_mg");
+
+                /**/
+                const div_titulo = document.createElement("div");
+                div_titulo.setAttribute("class", "div_titulo");
+
+                const div_button = document.createElement("div");
+                div_button.setAttribute("class", "div_button");
+                div_button.textContent = this.titulo
+
+                const button_x = document.createElement("button");
+                button_x.setAttribute("class", "button_x");
+                button_x.innerHTML = "x"
+
+                button_x.addEventListener("click", () => {
+                    this.ocultar();
+                })
+
+                const div_meio = document.createElement("div");
+                div_meio.setAttribute("class", "div_meio");
+                div_meio.innerHTML = this.discricao;
+
+
+                const div_rodape = document.createElement("div");
+                div_rodape.setAttribute("class", "div_rodape");
+
+                const div_button_sim = document.createElement("div");
+                div_button_sim.setAttribute("class", "div_button_sim");
+
+                const button_nao = document.createElement("button");
+                button_nao.setAttribute("class", "button_ok");
+                button_nao.innerHTML = "não"
+                button_nao.addEventListener("click", () => {
+                    resolve(false);
+                    this.ocultar();
+                })
+
+                const button_ok = document.createElement("button");
+                button_ok.setAttribute("class", "button_ok");
+                button_ok.innerHTML = "sim"
+                button_ok.addEventListener("click", () => {
+                    resolve(true);
+                    this.ocultar();
+                })
+
+                div_button_sim.appendChild(button_ok);
+                div_button_sim.appendChild(button_nao);
+                div_rodape.appendChild(div_button_sim);
+                div_button.appendChild(button_x);
+                div_titulo.appendChild(div_button);
+                div_corpo.append(div_titulo, div_meio, div_rodape);
+
+                div_fundo_msg.appendChild(div_corpo)
+                this.fundo_msg.appendChild(div_fundo_msg);
+            });
+        }
     }
-}
-
-export function mensagemErro(texto) {
-    const conteudo = container_mensagem.querySelector("div");
-    if (!conteudo) {
-        const div = document.createElement("div");
-        div.setAttribute("class", "erro")
-        div.textContent = texto;
-        container_mensagem.appendChild(div);
-
-        setInterval(() => {
-            div.remove();
-        }, 2000)
-    }
-}
-
-export function mensagemSucessso(texto) {
-    const conteudo = container_mensagem.querySelector("div");
-    if (!conteudo) {
-        const div = document.createElement("div");
-        div.setAttribute("class", "sucesso");
-        div.textContent = texto;
-        container_mensagem.appendChild(div);
-
-        setInterval(() => {
-            div.remove();
-        }, 2000)
+    ocultar() {
+        this.fundo_msg.innerHTML = "";
     }
 }

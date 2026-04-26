@@ -77,9 +77,12 @@ class ServiceInstituicao {
     async atualizar(id, data) {
         const resposta = await this.repositoryinstituicao.listarId(id);
         if (!resposta) {
-            throw new Error("Intituição não encontrado.");
+            throw new Error("Instituição não encontrada.");
         }
-        const senhaSegura = await bcrypt_1.default.hash(resposta.senha, 10);
+        let senhaSegura = resposta.senha;
+        if (data.senha) {
+            senhaSegura = await bcrypt_1.default.hash(data.senha, 10);
+        }
         const update = await this.repositoryinstituicao.atualizar(id, {
             nome: data.nome ?? resposta.nome,
             email: data.email ?? resposta.email,

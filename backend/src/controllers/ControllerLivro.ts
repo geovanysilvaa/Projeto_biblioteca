@@ -30,6 +30,7 @@ export class LivroController {
             const id = Number(req.params.id)
             const resposta = await this.livroservice.listarId(id);
             res.status(200).json({
+                sucesso:true,
                 dados: resposta,
                 mensagem: "Livro encontrado com sucesso"
             });
@@ -59,6 +60,7 @@ export class LivroController {
         try {
             const resposta = await this.livroservice.listarTodos();
             res.status(200).json({
+                sucesso:true,
                 dados: resposta,
                 mensagem: "Livros listados com sucesso"
             });

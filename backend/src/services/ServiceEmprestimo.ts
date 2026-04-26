@@ -49,7 +49,6 @@ export class ServiceEmprestimo implements IEmprestimoService {
             throw new Error("Livro indisponível.");
         }
 
-
         const emprestimoCriado = await this.repositoryemprestimo.cadastrarEmprestimo({
             alunoID: data.alunoID,
             livroID: data.livroID,

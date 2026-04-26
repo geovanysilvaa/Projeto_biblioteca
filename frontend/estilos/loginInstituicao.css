@@ -1,31 +1,16 @@
+@charset "UTF-8";
 /* Tela de Cadastro (Mobile, Table, Notebook) */
 
-* {
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-/**/
-:root {
-    --cor01: #21B2C5;
-    --cor02: #3595A0;
-    --cor03: #00DDF5;
-    --cor04: #3B6F75;
-    --cor05: #32484B;
-    --cor06: rgb(192, 210, 210);
-    --cor07: rgb(115, 164, 176);
-    --cor08: black;
-}
-
-nav>a{
+nav>a {
     font-size: 13px;
     display: flex;
     justify-content: center;
     text-decoration: none;
-    color:  rgb(94, 168, 242);
+    color: rgb(94, 168, 242);
 }
 
-a:hover{
-    color:  rgb(141, 200, 249);
+a:hover {
+    color: rgb(141, 200, 249);
 }
 
 body {
@@ -50,7 +35,7 @@ main>h2 {
     text-align: center;
 }
 
-main>form>label{
+main>form>label {
     font-size: 14px;
 }
 
@@ -65,53 +50,27 @@ main>form>button {
     width: 70%;
     height: 5vh;
     cursor: pointer;
-    
+
     border: none;
     border-radius: 8px;
 }
 
-main>form>input{
+main>form>input {
     background-color: white;
     max-width: 806px;
     min-width: 210px;
     width: 100%;
-  
+
     border: none;
-    border-bottom: 2px solid  rgb(94, 168, 242);
+    border-bottom: 2px solid rgb(94, 168, 242);
 }
 
-main>form>input:-webkit-autofill{
+main>form>input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0 1000px white inset;
     -webkit-text-fill-color: var(--cor08);
 }
 
 /**/
-.btn_login:hover{
+.btn_login:hover {
     background-color: rgb(141, 200, 249);
 }
-
-/* Mensagems de ERRO/SUCESSO */
-.erro{
-    background-color: rgb(244, 170, 170);
-    max-width: 300px;
-    width: 100%;
-    margin: auto;
-    text-align: center;
-    color: rgb(226, 116, 116);
-  
-    border-radius: 4px;
-    border: 1px solid red;
-}
-
-.sucesso{
-    background-color: rgb(109, 205, 109);
-    max-width: 300px;
-    width: 100%;
-    margin: auto;
-    text-align: center;
-    color: rgb(69, 179, 69);
-   
-    border-radius: 4px;
-    border: 1px solid green;
-}
-/****************************/

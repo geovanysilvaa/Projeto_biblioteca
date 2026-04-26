@@ -1,21 +1,5 @@
+@charset "UTF-8";
 /* Tela de Cadastro (Mobile, Table, Notebook) */
-
-* {
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-/**/
-:root {
-    --cor01: #21B2C5;
-    --cor02: #3595A0;
-    --cor03: #00DDF5;
-    --cor04: #3B6F75;
-    --cor05: #32484B;
-    --cor06: rgb(192, 210, 210);
-    --cor07: rgb(115, 164, 176);
-    --cor08: black;
-}
-
 body {
     background-color: white;
 }
@@ -71,31 +55,6 @@ main>form>input:-webkit-autofill {
     -webkit-text-fill-color: var(--cor08);
 }
 
-/**/
 .btn_cadastro:hover {
     background-color:  rgb(141, 200, 249);
 }
-
-/* Mensagems de ERRO/SUCESSO(login/cadastro) */
-.erro{
-    background-color: rgb(244, 170, 170);
-    border-radius: 4px;
-    border: 1px solid red;
-    max-width: 300px;
-    width: 100%;
-    margin: auto;
-    text-align: center;
-    color: rgb(226, 116, 116);
-}
-
-.sucesso{
-    background-color: rgb(109, 205, 109);
-    border-radius: 4px;
-    border: 1px solid green;
-    max-width: 300px;
-    width: 100%;
-    margin: auto;
-    text-align: center;
-    color: rgb(69, 179, 69);
-}
-/****************************/

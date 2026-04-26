@@ -5,19 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../estilos/cadastrar.css">
+    <link rel="stylesheet" href="../estilos/mensagem.css">
+    <link rel="stylesheet" href="../estilos/global.css">
     <title>Biblioteca</title>
 </head>
 
 <body>
-    <!-- main -->
+
+    
+
     <main>
-        <!-- h2 -->
-        <h2>Cadastrar
+
+        <h1>Cadastrar
             <img src="../icons/iconLivro.png" alt="icone livro">
-        </h2>
-        <!-- end h2 -->
-        <!-- form -->
-        <form id="formulario_cadastro">
+        </h1>
+
+        <form id="formulario_cadastro" class="formulario_cadastro">
             <label for="inome">Nome:</label>
             <input type="text" id="inome" placeholder="Digite seu nome" minlength="5" maxlength="30" required>
             <label for="iemail">Email:</label>
@@ -26,12 +29,11 @@
             <input type="password" id="isenha" placeholder="Digite sua senha" minlength="5" maxlength="30" required>
             <button type="submit" class="btn_cadastro" id="btn_cadastro">Cadastrar</button>
         </form>
-        <!-- end form -->
-        <!-- mensagem -->
-        <div id="Amensagem"></div>
-        <!-- end mensagem -->
+
     </main>
-    <!-- end main -->
+
+    <div id="mensagem"></div>
+    <script type="module" src="../componentes/mensagem.js"></script>
     <script type="module" src="../scripts/instituicaoCadastro.js"></script>
 </body>
 

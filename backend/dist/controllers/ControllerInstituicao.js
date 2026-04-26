@@ -71,7 +71,8 @@ class InstituicaoController {
                 const resposta = await this.serviceIntituicao.atualizar(id, data);
                 res.status(200).json({
                     mensagem: "Instituição atualizada com sucesso",
-                    dados: resposta
+                    dados: resposta,
+                    sucesso: true
                 });
             }
             catch (error) {
