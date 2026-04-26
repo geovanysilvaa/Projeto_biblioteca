@@ -39,7 +39,7 @@ class ServiceLivro {
             throw new Error("Instituição não existe.");
         }
         if (temLivro.length == 0) {
-            throw new Error("Não possui livros cadastrados");
+            throw new Error("Voçê não possui livros cadastrados");
         }
         return temLivro;
     }

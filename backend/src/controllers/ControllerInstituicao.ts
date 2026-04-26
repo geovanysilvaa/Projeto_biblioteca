@@ -48,7 +48,8 @@ export class InstituicaoController {
 
             res.status(200).json({
                 mensagem: "Instituições listadas com sucesso",
-                dados: resposta
+                dados: resposta,
+                sucesso:true
             });
         } catch (error) {
             next(error)
@@ -66,7 +67,8 @@ export class InstituicaoController {
 
             res.status(200).json({
                 mensagem: "Instituição encontrada com sucesso",
-                dados: resposta
+                dados: resposta,
+                sucesso:true
             });
         } catch (error) {
             next(error)
@@ -85,7 +87,8 @@ export class InstituicaoController {
 
             res.status(200).json({
                 mensagem: "Instituição atualizada com sucesso",
-                dados: resposta
+                dados: resposta,
+                sucesso:true
             });
         } catch (error) {
             next(error)
@@ -99,8 +102,12 @@ export class InstituicaoController {
             if (isNaN(id)) {
                 throw new Error("ID inválido");
             }
-            await this.serviceIntituicao.deletar(id);
-            res.status(204).send();
+            const resposta = await this.serviceIntituicao.deletar(id);
+            res.status(200).json({
+                mensagem: "Instituição apagada com sucesso",
+                dados: resposta,
+                sucesso:true
+            });
         } catch (error) {
             next(error)
         }

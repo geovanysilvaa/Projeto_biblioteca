@@ -47,7 +47,7 @@ export class ServiceLivro implements IServiceLivro {
     }
 
     public async listaLivrosInstituicao(id:number):Promise<ResponseLivro[]>{
-        const instituicaoID = this.repositoryinstituicao.listarId(id);
+        const instituicaoID = await this.repositoryinstituicao.listarId(id);
         
         const temLivro = await this.repositorylivro.listaLivrosInstituicao(id);
         
@@ -56,7 +56,7 @@ export class ServiceLivro implements IServiceLivro {
         }
         
         if(temLivro.length == 0){
-            throw new Error("Não possui livros cadastrados");
+            throw new Error("Voçê não possui livros cadastrados");
         }
         
         return temLivro;
@@ -108,7 +108,7 @@ export class ServiceLivro implements IServiceLivro {
     }
 
     public async delete(id: number): Promise<number> {
-        const exiteLivro = this.repositorylivro.listaLivrosId(id);
+        const exiteLivro = await this.repositorylivro.listaLivrosId(id);
         if (!exiteLivro) {
             throw new Error("Livro não existe.")
         }

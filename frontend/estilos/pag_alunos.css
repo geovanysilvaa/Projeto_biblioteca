@@ -1,28 +1,28 @@
 @charset "UTF-8";
-/* botões do form cadastrar livro */
-.btn_fecharForm {
+
+/* botões do form cadastrar aluno */
+.btn_fechar_form_aluno {
     background-color: rgb(248, 75, 75);
     border-radius: 8px;
     border: none;
 }
 
-.btn_fecharForm:hover {
+.btn_fechar_form_aluno:hover {
     background-color: red;
 }
 
-.btn_gravar {
+.btn_gravar_aluno {
     background-color: var(--cor06);
     border-radius: 3px;
     border: none;
 }
 
-.btn_gravar:hover {
+.btn_gravar_aluno:hover {
     background-color: rgb(141, 200, 249);
 }
-/********************************/
 
-/* Formulario cadastrar livro*/
-.fundo_formulario {
+/* Formulario cadastrar aluno */
+.fundo_formulario_aluno {
     background-color: #16161667;
     position: fixed;
     top: 0px;
@@ -39,7 +39,7 @@
     transition: 0.3s;
 }
 
-.titulo_formulario {
+.titulo_formulario_aluno {
     background-color: var(--cor02);
     max-width: 500px;
     min-width: 300px;
@@ -53,21 +53,22 @@
     border-radius: 5px 5px 0px 0px;
 }
 
-.corpo_formulario {
+.corpo_formulario_aluno {
     background-color: white;
     max-width: 500px;
     min-width: 300px;
-    max-height: 190px;
+    max-height: 240px;
     min-height: 100px;
     width: 70%;
-    height: 60vh;
+    height: 19vh;
+    border-radius: 5px;
 
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.rodape_formulario {
+.rodape_formulario_aluno {
     background-color: var(--cor02);
     max-width: 500px;
     min-width: 300px;
@@ -77,20 +78,17 @@
 
     display: flex;
     justify-content: center;
-
     border-radius: 0px 0px 5px 5px;
 }
 
-.ocultar_formulario {
+.ocultar_formulario_aluno {
     opacity: 0;
     visibility: hidden;
-
     transition: 0.3s;
 }
-/*******************************/
 
 /* botão de janela formulario */
-.btn_criarL {
+.btn_criar_aluno {
     background-color: rgb(94, 168, 242);
     color: white;
 
@@ -103,15 +101,12 @@
     box-shadow: 0px 0px 1px 1px rgba(208, 212, 210, 0.418);
 }
 
-.btn_criarL:hover {
+.btn_criar_aluno:hover {
     background-color: rgb(141, 200, 249);
 }
-/*****************************/
 
 /*div topo*/
-.topo_info {
-    /* background-color: rgb(125, 162, 231); */
-
+.topo_info_aluno {
     max-width: 1000px;
     width: 100%;
 
@@ -123,103 +118,89 @@
     border: none;
     border-top: 3px solid var(--cor02);
     border-radius: 5px 5px 0px 0px;
-    /* border: 3px solid rgb(255, 0, 132); */
 }
 
-.tipo {
+.tipo_aluno {
     text-shadow: 1px 1px 1px rgba(114, 114, 114, 0.352);
     color: rgb(77, 75, 75);
-    max-width: 164px;
-    width: 14%;
+    max-width: 200px;
+    width: 22%;
     display: flex;
     justify-content: center;
-    /* border: 1px solid rgb(4, 3, 3); */
 }
 
-.dados {
-    max-width: 164px;
-    width: 14%;
+.dados_aluno {
+    max-width: 200px;
+    width: 22%;
     text-align: center;
-
-    /* border: 2px solid rgb(119, 255, 0); */
 }
 
-.lista_livro {
+.lista_aluno {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    /* border: 2px solid red; */
 
     border-radius: 5px;
     box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.282);
 }
 
-.corpo_livro {
+.corpo_aluno {
     width: 1000px;
 
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: row;
-
-    /* border: 2px solid rgb(14, 10, 10); */
 }
 
-.fundo_livro {
-    /* background-color: rgb(178, 209, 241); */
+.fundo_aluno {
     max-width: 1000px;
     width: 100%;
-
     max-height: 40px;
     height: 10vh;
 
     display: flex;
     justify-content: space-around;
     justify-self: center;
-
-    /* border: 2px solid rgb(148, 148, 148); */
 }
 
-.corpo_livro:nth-child(odd) {
-    background-color:  rgb(143, 193, 243);
+.corpo_aluno:nth-child(odd) {
+    background-color: rgb(143, 193, 243);
 }
 
-.corpo_livro:nth-child(even) {
+.corpo_aluno:nth-child(even) {
     background-color: rgb(228, 225, 225);
 }
 
-.fundo_livro:hover {
+.fundo_aluno:hover {
     background-color: rgb(212, 235, 253);
 }
-/*******************/
 
-.btn_i {
+.btn_i_aluno {
     width: 15px;
 }
 
-.btn_rodape {
+.btn_rodape_aluno {
     display: flex;
 }
 
-.btn_editar {
+.btn_editar_aluno {
     border: none;
     border-bottom: 1px solid rgb(94, 168, 242);
-    ;
     border-radius: 5px;
 }
 
-.btn_editar:hover {
+.btn_editar_aluno:hover {
     background-color: rgb(212, 235, 253);
 }
 
-.btn_apagar {
+.btn_apagar_aluno {
     border: none;
     border-bottom: 1px solid rgb(94, 168, 242);
-    ;
     border-radius: 5px;
 }
 
-.btn_apagar:hover {
+.btn_apagar_aluno:hover {
     background-color: rgb(212, 235, 253);
 }

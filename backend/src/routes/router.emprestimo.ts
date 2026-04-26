@@ -4,7 +4,7 @@ import { EmprestimoController } from "../controllers/ControllerEmprestimo";
 export function routerEmprestimo(controllerEmprestimo: EmprestimoController) {
     const router = Router();
 
-    router.post("/faseremprestimo", controllerEmprestimo.novoEmprestimo);
+    router.post("/fazeremprestimo", controllerEmprestimo.novoEmprestimo);
     router.get("/", controllerEmprestimo.listarEmprestimos);
     router.get("/:id", controllerEmprestimo.listarEmprestimoId);
     router.put("/:id", controllerEmprestimo.atualizarEmprestimo);

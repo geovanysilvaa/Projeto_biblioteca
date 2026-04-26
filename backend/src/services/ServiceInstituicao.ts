@@ -15,13 +15,13 @@ export class ServiceInstituicao implements IServiceInstituicao {
 
     public async login(data: LoginInstituicaoDTO): Promise<ResponseInstituicaoDTO> {
         const existe = await this.repositoryinstituicao.listarEmail(data.email);
-  
+
         if (!existe) {
             throw new Error("Intituição não encontrado.");
         }
 
         const senhaSegura = await bcrypt.compare(data.senha, existe.senha);
-   
+
         if (!senhaSegura) {
             throw new Error("Email ou senha incorretas.");
         }
@@ -83,7 +83,7 @@ export class ServiceInstituicao implements IServiceInstituicao {
     public async listarId(id: number): Promise<ResponseInstituicaoDTO | null> {
         let resposta = await this.repositoryinstituicao.listarId(id);
         if (!resposta) {
-             throw new Error("Intituição não encontrado.");
+            throw new Error("Intituição não encontrado.");
         }
 
         return {
@@ -97,11 +97,15 @@ export class ServiceInstituicao implements IServiceInstituicao {
     public async atualizar(id: number, data: UpdateInstituicaoDTO): Promise<ResponseInstituicaoDTO> {
         const resposta = await this.repositoryinstituicao.listarId(id);
         if (!resposta) {
-             throw new Error("Intituição não encontrado.");
+            throw new Error("Instituição não encontrada.");
         }
 
-        const senhaSegura = await bcrypt.hash(resposta.senha,10);
-        
+        let senhaSegura = resposta.senha;
+
+        if (data.senha) {
+             senhaSegura = await bcrypt.hash(data.senha, 10);
+        }
+
         const update: ResponseInstituicaoDTO = await this.repositoryinstituicao.atualizar(id, {
             nome: data.nome ?? resposta.nome,
             email: data.email ?? resposta.email,
@@ -118,8 +122,8 @@ export class ServiceInstituicao implements IServiceInstituicao {
 
     public async deletar(id: number): Promise<number> {
         const existeInstituicao = await this.repositoryinstituicao.listarId(id);
-        if(!existeInstituicao){
-           throw new Error("Intituição não encontrado.");  
+        if (!existeInstituicao) {
+            throw new Error("Intituição não encontrado.");
         }
         const resposta = await this.repositoryinstituicao.deletar(id);
 

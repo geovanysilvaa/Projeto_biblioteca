@@ -1,17 +1,15 @@
-/* imports*/
+/* imports */
 import { CaixaMsg } from "../componentes/mensagem.js";
-import { listarLivro } from "../scripts/pag_cadastro.js";
 
 /* endpoints */
-const endpointLivroDelete = "http://localhost:3000/livro";
-const endpointLivroUpdate = "http://localhost:3000/livro";
-const endpointLivroID = "http://localhost:3000/livro";
-const endpointListaLivro = "http://localhost:3000/livro/instituicao";
-const endpointCadastraLivro = "http://localhost:3000/livro/cadastrar";
+const endpointCadastrarEmprestimo = "http://localhost:3000/emprestimo/fazeremprestimo";
+const endpointListaEmprestimo = "http://localhost:3000/emprestimo";
+const endpointEmprestimoId = "http://localhost:3000/emprestimo";
+const endpointUpdateEmprestimo = "http://localhost:3000/emprestimo";
+const endpointDeleteEmprestimo = "http://localhost:3000/emprestimo";
 
-
-export async function cadastrarLivro(dados) {
-    const resposta = await fetch(endpointCadastraLivro, {
+export async function cadastrarEmprestimo(dados) {
+    const resposta = await fetch(endpointCadastrarEmprestimo, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -22,69 +20,60 @@ export async function cadastrarLivro(dados) {
     const info = await resposta.json();
 
     if (info.sucesso) {
-        const idins = localStorage.getItem("id");
         let msg = new CaixaMsg('ok', 'Alerta', info.mensagem);
         msg.monstrar();
-        listarLivro(idins);
     } else {
         let msg = new CaixaMsg('ok', 'Alerta', info.message);
         msg.monstrar();
     }
 }
 
-export async function listarLivroInstituicao(id) {
-    // console.log(id)  
+export async function listarEmprestimos() {
     try {
-
-        const resposta = await fetch(endpointListaLivro + `/${id}`);
-
+        const resposta = await fetch(endpointListaEmprestimo);
         const info = await resposta.json();
+
         if (!resposta.ok) {
             throw new Error(info.message);
         } else {
             return info;
         }
-
     } catch (error) {
-        document.getElementById("lVazio").innerHTML = error;
+        let msg = new CaixaMsg('ok', 'Alerta', error);
+        msg.monstrar();
     }
 }
 
-export async function listarLivroID(id) {
-     return fetch(endpointLivroID+`/${id}`)
-    .then(res=>res.json())
-    .then(data=>{
-       return data;
-    })
-    
+export async function listarEmprestimoId(id) {
+    return fetch(endpointEmprestimoId + `/${id}`)
+        .then(res => res.json())
+        .then(data => {
+            return data;
+        });
 }
 
-export async function updateLivro(id, dados01) {
-    // console.log(id)
-    const resposta = await fetch(endpointLivroUpdate + `/${id}`, {
+export async function updateEmprestimo(id, dados) {
+    const resposta = await fetch(endpointUpdateEmprestimo + `/${id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify(dados01)
+        body: JSON.stringify(dados)
     });
 
     const info = await resposta.json();
 
     if (info.sucesso) {
-        const idins = localStorage.getItem("id")
-        listarLivro(idins);
         let msg = new CaixaMsg('ok', 'Alerta', info.mensagem);
         msg.monstrar();
     } else {
         let msg = new CaixaMsg('ok', 'Alerta', info.message);
         msg.monstrar();
     }
-
 }
 
-export async function deletarLivro(id) {
-    const resposta = await fetch(endpointLivroDelete + `/${id}`, {
+export async function deletarEmprestimo(id) {
+    const resposta = await fetch(endpointDeleteEmprestimo + `/${id}`, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json"
@@ -96,8 +85,6 @@ export async function deletarLivro(id) {
     if (info.sucesso) {
         let msg = new CaixaMsg('ok', 'Alerta', info.mensagem);
         msg.monstrar();
-        const idins = localStorage.getItem("id");
-        listarLivro(idins);
     } else {
         let msg = new CaixaMsg('ok', 'Alerta', info.message);
         msg.monstrar();

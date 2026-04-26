@@ -16,6 +16,7 @@ export class EmprestimoController {
             let emprestimo: CreateEmprestimo = req.body;
             const resposta = await this.emprestimoService.novoEmprestimo(emprestimo);
             res.status(200).json({
+                sucesso: true,
                 dados: resposta,
                 mensagem: "Emprestimo cadastrado com sucesso."
             });
@@ -29,6 +30,7 @@ export class EmprestimoController {
             let id = Number(req.params.id)
             const resposta = await this.emprestimoService.listarEmprestimoId(id);
             res.status(200).json({
+                sucesso: true,
                 dados: resposta,
                 mensagem: "Emprestimo encontrado com sucesso."
             });
@@ -41,6 +43,7 @@ export class EmprestimoController {
         try {
             const resposta = await this.emprestimoService.listarEmprestimos();
             res.status(200).json({
+                sucesso: true,
                 dados: resposta,
                 mensagem: "Emprestimos listados com sucesso."
             });
@@ -57,6 +60,7 @@ export class EmprestimoController {
             }
             const resposta = await this.emprestimoService.atualizarEmprestimo(id, req.body);
             res.status(200).json({
+                sucesso: true,
                 dados: resposta,
                 mensagem: "Emprestimo atualiza com sucesso."
             });
@@ -71,8 +75,12 @@ export class EmprestimoController {
             if (isNaN(id)) {
                 throw new Error("ID inválido.");
             }
-            await this.emprestimoService.delete(id);
-            res.status(204).send();
+            const resposta = await this.emprestimoService.delete(id);
+            res.status(200).json({
+                sucesso: true,
+                dados: resposta,
+                mensagem: "Emprestimo apagado com sucesso."
+            });
         } catch (error) {
             next(error)
         }

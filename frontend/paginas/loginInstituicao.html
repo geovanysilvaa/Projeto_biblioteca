@@ -5,19 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../estilos/loginInstituicao.css">
-    <!-- <link rel="stylesheet" href="../estilos//mensagem.css"> -->
+    <link rel="stylesheet" href="../estilos//mensagem.css">
+    <link rel="stylesheet" href="../estilos/global.css">
     <title>Biblioteca</title>
 </head>
 
 <body>
-    <!-- main -->
+
     <main>
-        <!-- h2 -->
-        <h2>Login
+
+        <h1>Login
             <img src="../icons/iconLivro.png" alt="icone livro">
-        </h2>
-        <!-- end h2 -->
-        <!-- form -->
+        </h1>
+
         <form id="formulario_login">
             <label for="lemail">Email:</label>
             <input type="email" id="lemail" placeholder="Digite seu email" minlength="5" maxlength="30" required>
@@ -25,19 +25,16 @@
             <input type="password" id="lsenha" placeholder="Digite sua senha" minlength="5" maxlength="30" required>
             <button type="submit" class="btn_login" id="btn_login">Login</button>
         </form>
-        <!-- end form -->
 
         <nav>
             <a href="cadastroInstituicao.html">Cadastrar Instituição?</a>
         </nav>
 
-        <!-- mensagem -->
-        <div id="Amensagem"></div>
-        <!-- end mensagem -->
     </main>
-    <!-- end main -->
+    <div id="mensagem"></div>
+
     <script type="module" src="../scripts/instituicaoLogin.js"></script>
-    <!-- <script type="module" src="../componentes/mensagem.js"></script> -->
+    <script type="module" src="../componentes/mensagem.js"></script>
 </body>
 
 </html>

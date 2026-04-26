@@ -1,26 +1,29 @@
 /* imports*/
-import { listarLivroInstituicao, cadastrarLivro, updateLivro } from "../api/livro.js";
-import { msg } from "../componentes/mensagem.js";
+import { listarLivroInstituicao, cadastrarLivro, updateLivro, deletarLivro,listarLivroID } from "../api/livro.js";
+import { CaixaMsg } from "../componentes/mensagem.js";
 
 
 /* formulario */
 const fundo_formulario = document.querySelector("#fundo_formulario");
 const corpo_formulario = document.querySelector("#corpo_formulario");
 
-/* formularios */
-const fundo_formularioV = document.querySelector("#fundo_formularioV");
-const corpo_formularioV = document.querySelector("#corpo_formularioV");
-
 /* container */
 const lista_livro = document.querySelector("#lista_livro");
 
+let formulario = "c";
+let idLivro = "0";
+
 /* Eventos */
 document.addEventListener("click", (evento) => {
+
     const btn = evento.target.closest("#btn_criarL");
     if (btn) {
+        const titulo_Form = document.getElementById("titulo_Form").innerHTML = "Cadastrar livro";
         fundo_formulario.classList.remove("ocultar_formulario");
+        formulario = "c";
+        InputLivro();
     }
-})
+});
 
 document.addEventListener("click", (evento) => {
     const btn = evento.target.closest("#btn_fecharForm");
@@ -28,6 +31,40 @@ document.addEventListener("click", (evento) => {
         fundo_formulario.classList.add("ocultar_formulario");
     }
 });
+
+async function InputLivro(id) {
+
+    let dados= await listarLivroID(id);
+
+    // console.log(dados.dados);
+
+    if (formulario == "i") {
+
+        const inome = document.querySelector("#inome");
+        inome.value = dados.dados.nome;
+        const iautor = document.querySelector("#iautor");
+        iautor.value = dados.dados.autor;
+        const icategoria = document.querySelector("#icategoria");
+        icategoria.value = dados.dados.categoria;
+        const iano = document.querySelector("#iano");
+        iano.value = dados.dados.ano;
+        const iquantidade = document.querySelector("#iquantidade");
+        iquantidade.value = dados.dados.quantidade;
+
+    } else if (formulario == "c") {
+
+        const inome = document.querySelector("#inome");
+        inome.value = '';
+        const iautor = document.querySelector("#iautor");
+        iautor.value = '';
+        const icategoria = document.querySelector("#icategoria");
+        icategoria.value = '';
+        const iano = document.querySelector("#iano");
+        iano.value = '';
+        const iquantidade = document.querySelector("#iquantidade");
+        iquantidade.value = '';
+    }
+}
 
 document.addEventListener("submit", (evento) => {
     const btn = evento.target.closest("#fundo_formulario");
@@ -58,140 +95,103 @@ document.addEventListener("submit", (evento) => {
         instituicaoID: instituicaoID
     }
 
-    cadastrarLivro(dados);
+    if (formulario == "c") {
+        cadastrarLivro(dados);
+    } else if (formulario == "i") {
+        // console.log(idLivro)
+        updateLivro(idLivro, dados);
+    }
+
     corpo_formulario.reset();
     fundo_formulario.classList.add("ocultar_formulario");
-
 });
 
+function limparLista() {
+
+    if (lista_livro) {
+        lista_livro.innerHTML = "";
+        return;
+    }
+}
 
 export async function listarLivro(id) {
 
     const dados = await listarLivroInstituicao(id);
-    lista_livro.innerHTML = "";
-    console.log(dados)
 
+    limparLista();
 
     dados.dados.map((elemento) => {
 
-        const divcontainer = document.createElement("div");
-        divcontainer.setAttribute("class", "lista_livro")
-        lista_livro.appendChild(divcontainer);
-
         const corpo_livro = document.createElement("div");
         corpo_livro.setAttribute("class", "corpo_livro");
-        divcontainer.appendChild(corpo_livro);
-
-        const titulo_livro = document.createElement("div");
-        titulo_livro.setAttribute("class", "titulo_livro");
-        corpo_livro.appendChild(titulo_livro);
-
 
         const fundo_livro = document.createElement("div");
         fundo_livro.setAttribute("class", "fundo_livro");
+
+        const id = document.createElement("div");
+        id.setAttribute("class", "dados");
+        id.textContent = elemento.id;
+
+        const nome = document.createElement("div");
+        nome.setAttribute("class", "dados");
+        nome.textContent = elemento.nome;
+
+        const categoria = document.createElement("div");
+        categoria.setAttribute("class", "dados");
+        categoria.textContent = elemento.categoria;
+
+        const btn_rodape = document.createElement("div");
+        btn_rodape.setAttribute("class", "btn_rodape");
+
+        const btn_editar = document.createElement("button");
+        btn_editar.setAttribute("class", "btn_editar");
+        btn_editar.setAttribute("data-id", elemento.id)
+
+        const img_editar = document.createElement("img");
+        img_editar.setAttribute("class", "btn_i");
+        img_editar.setAttribute("src", "../icons/iconEditar.png");
+
+        btn_editar.addEventListener("click", (evento) => {
+
+            formulario = "i";
+            idLivro = evento.currentTarget.dataset.id;
+            InputLivro(idLivro);
+            const titulo_Form = document.getElementById("titulo_Form").innerHTML = "Editar Livro";
+            fundo_formulario.classList.remove("ocultar_formulario");
+        });
+
+        const btn_apagar = document.createElement("button");
+        btn_apagar.setAttribute("class", "btn_apagar");
+        btn_apagar.setAttribute("data-id", elemento.id);
+
+        const img_apagar = document.createElement("img");
+        img_apagar.setAttribute("class", "btn_i");
+        img_apagar.setAttribute("src", "../icons/iconDelete.png");
+
+        btn_apagar.addEventListener("click", (evento) => {
+
+            let id = evento.currentTarget.dataset.id;
+            let msg = new CaixaMsg('sn', 'Alerta', 'Deseja apagar esse livro?');
+
+            msg.monstrar()
+                .then(resultado => {
+                    if (resultado) {
+                        deletarLivro(id);
+                    }
+                });
+        });
+        
+        btn_editar.appendChild(img_editar)
+        btn_apagar.appendChild(img_apagar)
+
+        btn_rodape.appendChild(btn_editar);
+        btn_rodape.appendChild(btn_apagar);
+        fundo_livro.append(id, nome, categoria);
         corpo_livro.appendChild(fundo_livro);
 
-        const rodape_livro = document.createElement("div");
-        rodape_livro.setAttribute("class", "rodape_livro");
-        corpo_livro.appendChild(rodape_livro);
-
-
-        /* botão editar livro */
-        const botao_editar = document.createElement("button");
-        botao_editar.setAttribute("class", "btn_editar");
-        botao_editar.setAttribute("id", elemento.id);
-        rodape_livro.appendChild(botao_editar);
-
-        botao_editar.addEventListener("click", (evento) => {
-            fundo_formularioV.classList.remove("ocultar_formularioV");
-            const id = evento.currentTarget.id;
-
-            if (evento.target) {
-                corpo_formularioV.addEventListener("submit", (evento) => {
-                    evento.preventDefault();
-
-
-                    const inome = document.querySelector("#vnome").value;
-                    const iautor = document.querySelector("#vautor").value;
-                    const icategoria = document.querySelector("#vcategoria").value;
-                    const iano = document.querySelector("#vano").value;
-                    const iquantidade = document.querySelector("#vquantidade").value;
-
-                    if (!inome || !iautor || !icategoria || !iano || !iquantidade) {
-                        return;
-                    }
-
-                    let dados = {
-                        nome: inome,
-                        autor: iautor,
-                        categoria: icategoria,
-                        ano: iano,
-                        quantidade: iquantidade
-                    }
-
-                    updateLivro(id, dados);
-                    corpo_formularioV.reset();
-                    fundo_formularioV.classList.add("ocultar_formularioV");
-                })
-
-            }
-        });
-
-        const btn_fecharFormV = document.querySelector("#btn_fecharFormV");
-
-        btn_fecharFormV.addEventListener("click", () => {
-            fundo_formularioV.classList.add("ocultar_formularioV");
-        });
-
-        const imgeditar = document.createElement("img");
-        imgeditar.setAttribute("src", "../icons/iconEditar.png")
-        botao_editar.appendChild(imgeditar);
-        /**/
-
-        /* botão delete livro */
-        const botao_delete = document.createElement("button");
-        botao_delete.setAttribute("class", "btn_deletar");
-        botao_delete.setAttribute("id", elemento.id);
-        rodape_livro.appendChild(botao_delete);
-
-        botao_delete.addEventListener("click", (evento) => {
-            if (evento.target) {
-                const id = evento.currentTarget.id;
-                msg(id);
-            }
-        });
-
-        const imgdeletar = document.createElement("img");
-        imgdeletar.setAttribute("src", "../icons/iconDelete.png")
-        botao_delete.appendChild(imgdeletar);
-        /**/
-
-        /* Dados da (API) */
-        const pid = document.createElement("p");
-        pid.innerHTML = `ID${elemento.id}`;
-        titulo_livro.appendChild(pid);
-
-        const pnome = document.createElement("p");
-        pnome.innerHTML = `Titulo:${elemento.nome}`;
-        fundo_livro.appendChild(pnome);
-
-        const pautor = document.createElement("p");
-        pautor.innerHTML = `Autor:${elemento.autor}`;
-        fundo_livro.appendChild(pautor);
-
-        const pquantidade = document.createElement("p");
-        pquantidade.innerHTML = `Quantidade:${elemento.quantidade}`;
-        fundo_livro.appendChild(pquantidade);
-
-        const pcategoria = document.createElement("p");
-        pcategoria.innerHTML = `Categoria:${elemento.categoria}`;
-        fundo_livro.appendChild(pcategoria);
-
-        const pano = document.createElement("p");
-        pano.innerHTML = `Ano:${elemento.ano}`;
-        fundo_livro.appendChild(pano);
+        corpo_livro.appendChild(btn_rodape);
+        lista_livro.appendChild(corpo_livro);
     });
-    /**/
 }
 
 document.addEventListener("DOMContentLoaded", () => {

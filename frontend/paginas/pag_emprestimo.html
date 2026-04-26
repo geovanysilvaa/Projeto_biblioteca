@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../estilos/global.css">
+    <link rel="stylesheet" href="../estilos/pag_emprestimo.css">
+    <link rel="stylesheet" href="../estilos/mensagem.css">
+    <title>Biblioteca</title>
+</head>
+
+<body>
+    <header>
+        <h1>Biblioteca
+            <img src="../icons/iconLivro.png" alt="imagem icone livro">
+        </h1>
+
+        <nav>
+            <a href="telaInicio.html">Home</a>
+            <a href="pag_cadastro.html">Cadastro</a>
+            <a href="pag_alunos.html">Aluno</a>
+            <a class="btn_selecionado" href="pag_emprestimo.html">Emprestimo</a>
+            <a href="configuracao.html"><img src="../icons/config.png" alt="icone de configuração"></a>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <div id="fundo_formulario_emprestimo" class="fundo_formulario_emprestimo ocultar_formulario_emprestimo">
+                <div class="titulo_formulario_emprestimo">
+                    <h3 id="titulo_form_emprestimo">Cadastrar emprestimo</h3>
+                    <button class="btn_fechar_form_emprestimo" id="btn_fechar_form_emprestimo" type="button">x</button>
+                </div>
+
+                <form id="corpo_formulario_emprestimo" class="corpo_formulario_emprestimo" autocomplete="on">
+                    <label for="idata_devolucao">Data devolucao:</label>
+                    <input type="date" id="idata_devolucao" name="data_devolucao" required>
+
+                    <label for="ilivro_id">Livro ID:</label>
+                    <input type="number" id="ilivro_id" name="livroID" min="1" required>
+
+                    <label for="ialuno_id">Aluno ID:</label>
+                    <input type="number" id="ialuno_id" name="alunoID" min="1" required>
+
+                    <label for="iinstituicao_emprestimo">Instituicao ID:</label>
+                    <input type="number" id="iinstituicao_emprestimo" name="instituicaoID" min="1" required>
+
+                    <div class="rodape_formulario_emprestimo">
+                        <button class="btn_gravar_emprestimo" id="gravar_emprestimo" type="submit">Gravar</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <section>
+            <button class="btn_criar_emprestimo" id="btn_criar_emprestimo">Adicionar</button>
+
+            <div class="topo_info_emprestimo">
+                <div class="tipo_emprestimo">ID</div>
+                <div class="tipo_emprestimo">EMPRESTIMO</div>
+                <div class="tipo_emprestimo">DEVOLUCAO</div>
+                <div class="tipo_emprestimo">LIVRO ID</div>
+                <div class="tipo_emprestimo">ALUNO ID</div>
+                <div class="tipo_emprestimo">INSTITUICAO ID</div>
+            </div>
+
+            <div id="lista_emprestimo" class="lista_emprestimo"></div>
+        </section>
+    </main>
+
+    <div style="display: flex; justify-content: center; align-items: center; margin-top: 400px;">
+        <p id="emprestimoVazio" style="color: rgb(146, 145, 145); transition: 0.3s ease;"></p>
+    </div>
+
+    <div id="mensagem"></div>
+
+    <script type="module" src="../scripts/pag_emprestimo.js"></script>
+    <script type="module" src="../componentes/mensagem.js"></script>
+</body>
+
+</html>
